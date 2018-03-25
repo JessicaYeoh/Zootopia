@@ -1,13 +1,16 @@
 <?php
+session_start();
 include '../../model/db.php';
 include 'header.php';
-
+include 'nav.php';
 $conn = connect();
 ?>
 
-    <h1 id="ad_h1">Post your ad</h1>
+
 
     <div id="post_ad_container">
+        <h1 id="ad_h1">Post your ad</h1>
+
       <form id="ad_form">
 
           <div id="ad_form_section1">

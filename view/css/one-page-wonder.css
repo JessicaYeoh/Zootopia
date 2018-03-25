@@ -174,6 +174,8 @@ header.masthead .bg-circle-4 {
   margin: 0 auto;
   padding-top: 10px;
   padding-bottom: 50px;
+  position: relative;
+  top: 100px;
 }
 
 #ad_form{
@@ -189,8 +191,8 @@ header.masthead .bg-circle-4 {
   display: none;
 }
 
-#ad_h1{
-  text-align: center;
+#post_ad_container h1{
+  margin: 0 auto;
 }
 /*****************************END Post Ad Page****************************************/
 
@@ -232,8 +234,18 @@ header.masthead .bg-circle-4 {
 
 /*************************FINISH LOGGED IN PROFILE UPDATE Page*****************************/
 
+/*******************************BROWSE ADS PAGE**********************************/
+#browse_ads{
+  position: relative;
+  top: 100px;
+}
+/*******************************BROWSE ADS PAGE**********************************/
 
-
+/*******************************FOOTER***********************************/
+#sessionID, #welcome_footer{
+  color: white;
+}
+/*******************************FOOTER***********************************/
 
 @media only screen and (max-width: 768px) {
   #post_ad_container{

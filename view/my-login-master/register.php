@@ -57,6 +57,8 @@
 									</label>
 								</div>
 
+<input type="hidden" name="action_type" value="add"/>
+
 								<div class="form-group no-margin">
 									<button type="submit" class="btn btn-primary btn-block">
 										Sign Up

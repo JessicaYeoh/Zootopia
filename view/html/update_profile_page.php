@@ -14,15 +14,13 @@ $conn = connect();
 
 
 $login_ID = $_GET['loginID'];
-echo $login_ID;
 
 $updateProfile = getOneUser($login_ID);
 
 $firstName = $updateProfile['firstName'];
-$surname = $updateProfile['lastSurname'];
+$surname = $updateProfile['lastName'];
 $address = $updateProfile['addressID'];
 $email = $updateProfile['loginUsername'];
-// echo $firstName;
 ?>
 
 <div id="loggedin_page">

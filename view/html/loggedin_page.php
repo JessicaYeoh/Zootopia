@@ -21,7 +21,13 @@ $conn = connect();
     </p>
 
     <a href="update_profile_page.php?loginID=<?php echo $_SESSION['userID'] ?>" id="update_button" type="button" class="btn btn-primary">
-Update </a>
+Account Details </a>
+
+<a href="update_profile_page.php?loginID=<?php echo $_SESSION['userID'] ?>" id="update_button" type="button" class="btn btn-primary">
+My ads</a>
+
+<a href="update_profile_page.php?loginID=<?php echo $_SESSION['userID'] ?>" id="update_button" type="button" class="btn btn-primary">
+Payments</a>
 
   </div>
 </body>

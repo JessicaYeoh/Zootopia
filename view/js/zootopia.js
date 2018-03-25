@@ -38,9 +38,9 @@ function showSection4(){
   document.getElementById('ad_form_section4').style.display = 'block';
 }
 // END OF FUNCTIONS TO SHOW/HIDE POST AN AD SECTION
-function showMsg(loginID) {
+function showMsg(login_ID) {
 
-var updateUrl = "../../controller/update_profile.php?loginID=" + loginID;
+var updateUrl = "../../controller/update_profile.php?loginID=" + login_ID;
 
   $.ajax(
     {
@@ -49,6 +49,7 @@ var updateUrl = "../../controller/update_profile.php?loginID=" + loginID;
       data: $('#profile_update_form').serialize(),
       datatype: 'json',
       success:function(result) {
+    	  
           $("#message").html("updated");
           // alert("Updated");
       },

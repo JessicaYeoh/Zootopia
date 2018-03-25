@@ -10,31 +10,43 @@
 
     <title>Zootopia</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="view/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<?php
+$PHP_SELF=$_SERVER['PHP_SELF'];
 
-    <!-- Custom styles for this template -->
-    <link href="view/css/one-page-wonder.css" rel="stylesheet">
-    <link href="../css/one-page-wonder.css" rel="stylesheet">
+$RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos($PHP_SELF,''));
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    // Bootstrap core CSS
+    echo '<link href=" ';
+    echo $RootDir;
+    echo '/view/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">';
 
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFlroMXsGgmRsAgtSmtBqpBLYzpyAWP7Q&callback=myMap"></script>
+    // Custom styles for this template
+    echo '<link href=" ';
+    echo $RootDir;
+    echo '/view/css/one-page-wonder.css" rel="stylesheet">';
 
-    <!-- Javascript/jQuery -->
-    <script src="view/vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/jquery/jquery.min.js"></script>
+    // Custom fonts for this template
+    echo '<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">';
+    echo '<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">';
 
-    <!-- Bootstrap JS-->
-    <script src="view/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    // Google Maps API
+    echo '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFlroMXsGgmRsAgtSmtBqpBLYzpyAWP7Q&callback=myMap"></script>';
 
-    <script src="view/js/zootopia.js"> </script>
-    <script src="../js/zootopia.js"> </script>
+    // Javascript/jQuery
+    echo '<script src=" ';
+    echo $RootDir;
+    echo '/view/vendor/jquery/jquery.min.js"></script>';
+
+    // Bootstrap JS
+    echo '<script src=" ';
+    echo $RootDir;
+    echo '/view/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>';
+
+    echo '<script src=" ';
+    echo $RootDir;
+    echo '/view/js/zootopia.js"> </script>';
+   ?>
+
   </head>
 
   <body>
