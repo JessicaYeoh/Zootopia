@@ -2,12 +2,27 @@
   <div class="container">
     <p class="m-0 text-center text-white small">Copyright &copy; Zootopia 2018</p>
   </div>
+
+<p id="sessionID">
+  Session ID: <?php echo session_id()?>
+</p>
+
+<?php
+if(isset($_SESSION['login'])){
+?>
+
+<p id="welcome_footer">
+  Welcome <?php echo $_SESSION['firstname'];?>!
+</p>
+
+<?php
+}
+?>
+
   <!-- /.container -->
 </footer>
 
-<!-- Bootstrap core JavaScript -->
-<!-- <script src="vendor/jquery/jquery.min.js"></script> -->
-<!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+
 
 </body>
 
