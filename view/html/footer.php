@@ -3,16 +3,19 @@
     <p class="m-0 text-center text-white small">Copyright &copy; Zootopia 2018</p>
   </div>
 
-<p id="sessionID">
-  Session ID: <?php echo session_id()?>
-</p>
+
 
 <?php
 if(isset($_SESSION['login'])){
 ?>
+<p class="sessionID">
+  Session ID: <?php echo session_id()?>
+</p>
 
-<p id="welcome_footer">
-  Welcome <?php echo $_SESSION['firstname'];?>!
+<p class="sessionID">
+  <?php
+    print_r($_SESSION);
+  ?>
 </p>
 
 <?php
