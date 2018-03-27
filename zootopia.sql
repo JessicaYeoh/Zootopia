@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2018 at 02:42 AM
+-- Generation Time: Mar 27, 2018 at 04:15 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -53,6 +53,13 @@ CREATE TABLE `tbladdress` (
   `createDT` datetime NOT NULL,
   `updateDT` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbladdress`
+--
+
+INSERT INTO `tbladdress` (`addressID`, `address`, `suburb`, `postcode`, `state`, `createDT`, `updateDT`) VALUES
+(1, '12 Test Street', 'South Bank', '4001', 'QLD', '2018-03-27 00:00:00', '2018-03-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -104,8 +111,10 @@ CREATE TABLE `tblimagesuser` (
 
 CREATE TABLE `tbllogin` (
   `loginID` int(10) UNSIGNED NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
   `loginUsername` varchar(100) NOT NULL,
-  `loginPassword` varchar(10) NOT NULL,
+  `loginPassword` varchar(100) NOT NULL,
   `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updateDT` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -114,10 +123,13 @@ CREATE TABLE `tbllogin` (
 -- Dumping data for table `tbllogin`
 --
 
-INSERT INTO `tbllogin` (`loginID`, `loginUsername`, `loginPassword`, `createDT`, `updateDT`) VALUES
-(15, 'jessica.yeoh@outlook.com', 'qwerty', '2018-02-20 16:50:15', '0000-00-00 00:00:00'),
-(17, 'j.yo2011@hotmail.com', 'password12', '2018-02-20 16:56:13', '0000-00-00 00:00:00'),
-(22, 'jess@outlook.com', 'qwerty123', '2018-03-05 21:58:19', '0000-00-00 00:00:00');
+INSERT INTO `tbllogin` (`loginID`, `firstName`, `lastName`, `loginUsername`, `loginPassword`, `createDT`, `updateDT`) VALUES
+(54, 'Jessica', 'Yeoh', 'jessica.yeoh@outlook.com', '$2y$10$TiX0gp5xJdbFf3vhhIb6Lud9/FehytOsxcXzBnNX9f/Cxk5BSsX5.', '2018-03-27 10:42:11', '0000-00-00 00:00:00'),
+(55, 'Test', 'TestSurname', 'j.yo2011@hotmail.com', '$2y$10$0fO0S8ynLi2sQjxHYJTcjueD4AIEPB.S.g6AjBssCQwtnmcZPf7rK', '2018-03-27 11:05:40', '0000-00-00 00:00:00'),
+(56, 'Test2', 'Test2', 'test2@email.com', '$2y$10$Vr6nZi6TYVKNh5aF8I8SCe5bcf8jt31Z1vLLfQNinNhu40HvKtDNG', '2018-03-27 11:18:26', '0000-00-00 00:00:00'),
+(58, 'Test3', 'Test3', 'test3@email.com', '$2y$10$Xip42ALk73iq2FSe/1Sj3O22UqtkxnHEMYaSLP0LIK/OtzKXRSHfq', '2018-03-27 11:24:49', '0000-00-00 00:00:00'),
+(59, 'test4', 'test4', 'test4@email.com', '$2y$10$dXqKWC8hC/Yvd00hndAST.npwj0lv5O5dm.AyaAwi9L0BgLvMHPgi', '2018-03-27 11:28:59', '0000-00-00 00:00:00'),
+(60, 'test5', 'test5', 'test5@email.com', '$2y$10$O9ZzpU.AZGS2dGC7V.7d3Oace8fxwqImIG829qTB58hQ99aFvmgO.', '2018-03-27 11:37:08', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -160,8 +172,6 @@ CREATE TABLE `tblreviews` (
 
 CREATE TABLE `tbluser` (
   `userID` int(10) UNSIGNED NOT NULL,
-  `firstName` varchar(100) NOT NULL,
-  `lastName` varchar(100) NOT NULL,
   `phone` varchar(10) NOT NULL,
   `userType` varchar(50) NOT NULL,
   `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -174,8 +184,8 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`userID`, `firstName`, `lastName`, `phone`, `userType`, `createDT`, `updateDT`, `addressID`, `loginID`) VALUES
-(1, 'Jessica', 'Yeoh', '0491830482', 'Admin', '2018-03-20 15:19:34', '2018-03-20 15:19:15', NULL, 15);
+INSERT INTO `tbluser` (`userID`, `phone`, `userType`, `createDT`, `updateDT`, `addressID`, `loginID`) VALUES
+(7, '0490203940', 'Admin', '2018-03-27 11:00:41', '2018-03-27 11:00:00', 1, 54);
 
 --
 -- Indexes for dumped tables
@@ -260,7 +270,7 @@ ALTER TABLE `tblad`
 -- AUTO_INCREMENT for table `tbladdress`
 --
 ALTER TABLE `tbladdress`
-  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblbookings`
@@ -284,7 +294,7 @@ ALTER TABLE `tblimagesuser`
 -- AUTO_INCREMENT for table `tbllogin`
 --
 ALTER TABLE `tbllogin`
-  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `tblpet`
@@ -302,7 +312,7 @@ ALTER TABLE `tblreviews`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
