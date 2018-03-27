@@ -29,132 +29,78 @@
 					<!-- <div class="brand">
 						<img src="img/logo.jpg">
 					</div> -->
-					<div class="card fat">
-						<div class="card-body">
-							<h4 class="card-title">Register Account</h4>
+    					<div class="card fat">
+    						<div class="card-body">
+    							<h4 class="card-title">Register Account</h4>
 
-<!--************************** FIRST PART OF REGISTRATION **************************-->
-          <div id="register_form">
+    <!--************************** FIRST PART OF REGISTRATION **************************-->
+              <div id="register_form">
 
-              <form id="register_section1" action="../../controller/submit_register.php" method="POST">
+                  <form id="register_section1" action="../../controller/submit_register.php" method="POST">
 
-								<div class="form-group">
-									<label for="username">E-Mail Address</label>
-									<input id="username" type="email" class="form-control" name="username"
-                  onkeyup="checkemail();" />
-								</div>
+                    <div class="form-group">
+                      <label for="first_name">First Name</label>
+                      <input id="first_name" type="text" class="form-control" name="first_name" required>
+                    </div>
 
-          <div id="user_errDiv2"></div>
-
-								<div class="form-group">
-									<label for="password">Password</label>
-									<input id="password" type="password" class="form-control" name="password" data-eye>
-								</div>
-
-								<div class="form-group">
-									<label>
-										<input type="checkbox" name="aggree" value="1"> I agree to the Terms and Conditions
-									</label>
-								</div>
-
-<input type="hidden" name="action_type" value="add"/>
-
-								<div class="form-group no-margin">
-									<button type="submit" class="btn btn-primary btn-block">
-										Sign Up
-									</button>
-								</div>
-
-								<div class="margin-top20 text-center">
-									Already have an account? <a href="login_page.php">Login</a>
-								</div>
-
-                <div id="email_status"></div>
-
-                <div id="user_errDiv">
-
-                    <?php
-                    if(!isset($_SESSION['error'])){
-                      echo $_SESSION['message'] = '';
-                    }
-
-                    if(isset($_SESSION['error'])){
-                      echo $_SESSION['error'];
-                      unset($_SESSION['error']);
-                    } else {
-                      echo $_SESSION['message'];
-                    }
-                    ?>
-
-                </div>
-
-							</form>
-        </div>
-<!--************************** FIRST PART OF REGISTRATION **************************-->
-
-<!--************************** SECOND PART OF REGISTRATION **************************-->
-							<!-- <form id="register_section2" action="../php/submit_register2.php" method="POST">
-
-								<div class="form-group">
-									<label for="user_type">Account Type</label>
-									<select class="">
-					          <option name"user_type">I want to be a Customer to make bookings</option>
-					          <option name"user_type">I want to be a Pet Owner to post ads</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="first_name">First Name</label>
-									<input id="first_name" type="text" class="form-control" name="first_name" required>
-								</div>
-								<div class="form-group">
-									<label for="last_name">Last Name</label>
-									<input id="last_name" type="text" class="form-control" name="last_name" required>
-								</div>
-								<div class="form-group">
-									<label for="phone">Phone</label>
-									<input id="phone" type="text" class="form-control" name="phone" required>
-								</div> -->
-
-								<!-- <div class="form-group no-margin">
-									<button type="submit" class="btn btn-primary btn-block">
-										Next
-									</button>
-								</div> -->
-							<!-- </form> -->
-<!--************************** SECOND PART OF REGISTRATION **************************-->
-
-<!--************************** THIRD PART OF REGISTRATION **************************-->
-							<!-- <form action="../php/submit_register2.php" method="POST"> -->
+                    <div class="form-group">
+                      <label for="last_name">Last Name</label>
+                      <input id="last_name" type="text" class="form-control" name="last_name" required>
+                    </div>
 
 
-								<!-- <div class="form-group">
-									<label for="suburb">Suburb</label>
-									<input id="suburb" type="text" class="form-control" name="suburb" required>
-								</div>
-								<div class="form-group">
-									<label for="postcode">Postcode</label>
-									<input id="postcode" type="text" class="form-control" name="postcode" required>
-								</div>
-								<div class="form-group">
-									<label for="state">State</label>
-									<select class="" required>
-										<option>ACT</option>
-										<option>NSW</option>
-										<option>NT</option>
-										<option>QLD</option>
-										<option>TAS</option>
-										<option>VIC</option>
-										<option>WA</option>
-									</select>
-								</div>
+    								<div class="form-group">
+    									<label for="username">E-mail Address</label>
+    									<input id="username" type="email" class="form-control" name="username" onkeyup="checkemail();" />
+    								</div>
 
-								<div class="form-group no-margin">
-									<button type="submit" class="btn btn-primary btn-block">
-										Finish
-									</button>
-								</div>
-							</form> -->
-<!--************************** THIRD PART OF REGISTRATION **************************-->
+              <div id="user_errDiv2"></div>
+
+    								<div class="form-group">
+    									<label for="password">Password</label>
+    									<input id="password" type="password" class="form-control" name="password" data-eye>
+    								</div>
+
+    								<div class="form-group">
+    									<label>
+    										<input type="checkbox" name="aggree" value="1"> I agree to the Terms and Conditions
+    									</label>
+    								</div>
+
+    <input type="hidden" name="action_type" value="add"/>
+
+    								<div class="form-group no-margin">
+    									<button type="submit" class="btn btn-primary btn-block">
+    										Sign Up
+    									</button>
+    								</div>
+
+    								<div class="margin-top20 text-center">
+    									Already have an account? <a href="login_page.php">Login</a>
+    								</div>
+
+                    <div id="email_status"></div>
+
+                    <div id="user_errDiv">
+
+                        <?php
+                        if(!isset($_SESSION['error'])){
+                          echo $_SESSION['message'] = '';
+                        }
+
+                        if(isset($_SESSION['error'])){
+                          echo $_SESSION['error'];
+                          unset($_SESSION['error']);
+                        } else {
+                          echo $_SESSION['message'];
+                        }
+                        ?>
+
+                    </div>
+
+    							</form>
+            </div>
+
 
 						</div>
 					</div>

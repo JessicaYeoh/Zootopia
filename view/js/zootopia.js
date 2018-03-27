@@ -41,7 +41,7 @@ function showSection4(){
 function showMsg(login_ID) {
 
 var updateUrl = "../../controller/update_profile.php?loginID=" + login_ID;
-
+// console.log(updateUrl);
   $.ajax(
     {
       url:updateUrl,
@@ -49,13 +49,18 @@ var updateUrl = "../../controller/update_profile.php?loginID=" + login_ID;
       data: $('#profile_update_form').serialize(),
       datatype: 'json',
       success:function(result) {
-    	  
-          $("#message").html("updated");
-          // alert("Updated");
+          if(result.userUpdate == true) {
+            alert("Updated");
+          } else {
+            alert("Error");
+          }
+          // $("#message").html("updated");
+          // console.log(result);
       },
       error: function(error) {
-          $("#message").html("error");
-          // alert("Error");
+          // $("#message").html("error");
+          alert("Error");
+          // console.log(error);
         }
     }
   );
