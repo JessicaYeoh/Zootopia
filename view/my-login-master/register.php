@@ -1,6 +1,5 @@
 <?php
   session_start();
-  include '../html/nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +21,11 @@
 </head>
 
 <body class="my-login-page">
+
+<?php
+  include '../html/nav.php';
+?>
+
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">

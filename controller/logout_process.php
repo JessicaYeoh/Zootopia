@@ -4,6 +4,7 @@
 //  instead we'll unset all user-related $_SESSION values;
     unset($_SESSION['error']);
     unset($_SESSION['login']);
+    unset($_SESSION['adminUser']);
 
     header('Location: ../index.php');
 ?>

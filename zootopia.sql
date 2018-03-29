@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2018 at 04:15 AM
+-- Generation Time: Mar 29, 2018 at 08:43 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -173,7 +173,7 @@ CREATE TABLE `tblreviews` (
 CREATE TABLE `tbluser` (
   `userID` int(10) UNSIGNED NOT NULL,
   `phone` varchar(10) NOT NULL,
-  `userType` varchar(50) NOT NULL,
+  `userType` varchar(50) DEFAULT NULL,
   `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updateDT` datetime NOT NULL,
   `addressID` int(10) UNSIGNED DEFAULT NULL,

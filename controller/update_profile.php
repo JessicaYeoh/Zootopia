@@ -6,10 +6,9 @@ $conn = connect();
 
 
 if(isset($_GET['loginID']) && empty($_POST)) {
-  $login_ID = $_GET['loginID'];
 
   // if($_GET['loginID'] == $_SESSION['userID']) {
-    $result = getOneUser($login_ID);
+    $result = getOneUser($_GET['loginID']);
     if(is_array($result)) {
       echo json_encode($result);
       // echo $result;
@@ -21,9 +20,8 @@ if(isset($_GET['loginID']) && empty($_POST)) {
 }
 
 if(isset($_GET['loginID']) && !empty($_POST)) {
-  $login_ID = $_GET['loginID'];
 
-  if(updateUser($_POST, $login_ID)) {
+  if(updateUser($_POST, $_GET['loginID'])) {
     echo json_encode(Array('userUpdate'=>true));
       // $_SESSION['message'] = 'done';
       //  echo "updated";

@@ -54,6 +54,14 @@ function updateUser($postdata, $userID) {
       return true;
 }
 
+// function insertInfo($postdata, $addressID) {
+//
+//         $conn = connect();
+//         $contentquery = "INSERT INTO tbladdress INNER JOIN tbluser on tbladdress.addressID = tbluser.addressID INNER JOIN tbllogin on tbluser.loginID = tbllogin.loginID (phone, address, suburb, postcode, state) VALUES ($postdata['phone'], $postdata['address'], $postdata['suburb'], $postdata['postcode'], $postdata['state']) WHERE addressID = $addressID";
+//         $stmt = $conn->prepare($contentquery);
+//         $stmt->execute();
+// }
+
 function test_user_input($data) {
 	$conn = connect();
 	$data = trim($data);

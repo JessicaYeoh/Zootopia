@@ -78,7 +78,7 @@ $(function() {
 				email: "please input correct email"
 			},
 			password: {
-				minlength: "password is too short"
+				minlength: "password must be atleast 8 characters"
 			}
 		}
 	});
