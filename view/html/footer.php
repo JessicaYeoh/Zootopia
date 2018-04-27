@@ -9,10 +9,6 @@
 if(isset($_SESSION['login'])){
 ?>
 <p class="sessionID">
-  Session ID: <?php echo session_id()?>
-</p>
-
-<p class="sessionID">
   <?php
     print_r($_SESSION);
   ?>

@@ -19,11 +19,22 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
    echo '<div class="collapse navbar-collapse" id="navbarResponsive"> ';
 
     echo '<ul class="navbar-nav ml-auto"> ';
+
+if(isset($_SESSION['login']) && $_SESSION['login'] == true):
       echo '<li class="nav-item">
               <a href=" ';
               echo $RootDir;
-              echo '/view/html/post_ad.php" class="btn btn-primary nav-link">Post a pet</a>
+              echo '/view/html/post_ad.php?loginID=';
+              echo $_SESSION['loginID'];
+              echo ' " class="btn btn-primary nav-link">Post a pet</a>
             </li> ';
+else:
+      echo '<li class="nav-item">
+              <a href=" ';
+              echo $RootDir;
+              echo '/view/html/post_ad.php" class="btn btn-primary nav-link">Post a pet</a>';
+      echo '</li> ';
+endif;
 
       echo '<li class="nav-item">
               <a class="nav-link" href=" ';
@@ -44,7 +55,7 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true):
               <a class="nav-link" href="';
               echo $RootDir;
               echo '/view/html/loggedin_page.php?loginID=';
-              echo $_SESSION['userID'];
+              echo $_SESSION['loginID'];
               echo '">My account</a>
             </li>';
 

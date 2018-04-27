@@ -36,33 +36,6 @@ $(function() {
 		});
 	});
 
-// window.sessionStorage.setItem('emailexists', 'false');
-					// email variable = var email = $("#email");
-					// var checkurl = "registration_check_email.php?username(name of input)=" + email(variable name).value;
-
-	// $("#username").on('blur', function() {
-// function checkEmail() {
-	// 	var email = $("#username").val();
-	// 	var checkurl = "../../../controller/registration_check_email.php?username=" + email;
-	//
-	// 			$.ajax({
-	// 					url: checkurl,
-	// 					method: 'get',
-	// 					datatype: 'json',
-	// 					success: function(result) {
-	// 							if(result.emailexists == true) {
-	// 									window.sessionStorage.setItem('emailexists', 'true');
-	// 									$("#user_errDiv2").html("This email is already registered");
-	// 							} else {
-	// 									window.sessionStorage.setItem('emailexists', 'false');
-	// 							}
-	// 					},
-	// 					error: function(err) {
-	// 							console.log(err);
-	// 					}
-	// 			});
-	// });
-// }
 
 	$('#register_section1').validate({ //jquery validate plugin (must use id on form, do not use $('#register_section1').form.validate)
 		rules:{ //what rules to apply for each input

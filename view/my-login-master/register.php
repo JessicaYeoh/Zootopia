@@ -1,43 +1,19 @@
 <?php
   session_start();
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/my-login.css">
-  <link rel="stylesheet" type="text/css" href="../css/one-page-wonder.css">
-
-  <script src="js/jquery.min.js"></script>
-  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/my-login.js"></script>
-
-</head>
-
-<body class="my-login-page">
-
-<?php
+  include '../html/header.php';
   include '../html/nav.php';
 ?>
 
+<body class="my-login-page">
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-md-center h-100">
 				<div class="card-wrapper">
-					<!-- <div class="brand">
-						<img src="img/logo.jpg">
-					</div> -->
     					<div class="card fat">
     						<div class="card-body">
     							<h4 class="card-title">Register Account</h4>
 
-    <!--************************** FIRST PART OF REGISTRATION **************************-->
+
               <div id="register_form">
 
                   <form id="register_section1" action="../../controller/submit_register.php" method="POST">
@@ -115,7 +91,6 @@
 			</div>
 		</div>
 	</section>
-
 
 </body>
 </html>
