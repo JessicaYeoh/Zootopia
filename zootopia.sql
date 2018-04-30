@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2018 at 08:43 AM
+-- Generation Time: Apr 30, 2018 at 01:20 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -28,15 +28,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tblad` (
   `adID` int(10) UNSIGNED NOT NULL,
-  `petPrice` decimal(10,2) NOT NULL,
-  `priceType` varchar(45) NOT NULL,
   `adTitle` varchar(45) NOT NULL,
-  `adDescription` varchar(300) DEFAULT NULL,
+  `adDescription` text,
+  `location` varchar(200) NOT NULL,
+  `petPrice` varchar(50) NOT NULL,
+  `priceType` varchar(45) NOT NULL,
   `bookingType` varchar(45) NOT NULL,
   `postAdDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updateAdDT` datetime NOT NULL,
   `petID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblad`
+--
+
+INSERT INTO `tblad` (`adID`, `adTitle`, `adDescription`, `location`, `petPrice`, `priceType`, `bookingType`, `postAdDT`, `updateAdDT`, `petID`) VALUES
+(36, 'Japanese Spitz - very playful!', 'Looking for people who are interested in playing with my dog at my home. \r\n\r\nWeekends are the best time to meet but contact me for further info.\r\n\r\nMinimum 1 hour bookings', 'Brisbane', '$10.00', 'Hourly', 'Owner Supervised', '2018-04-29 16:40:03', '2018-04-29 16:40:03', 40);
 
 -- --------------------------------------------------------
 
@@ -50,16 +58,21 @@ CREATE TABLE `tbladdress` (
   `suburb` varchar(100) NOT NULL,
   `postcode` varchar(10) NOT NULL,
   `state` varchar(3) NOT NULL,
-  `createDT` datetime NOT NULL,
-  `updateDT` datetime NOT NULL
+  `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updateDT` datetime NOT NULL,
+  `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbladdress`
 --
 
-INSERT INTO `tbladdress` (`addressID`, `address`, `suburb`, `postcode`, `state`, `createDT`, `updateDT`) VALUES
-(1, '12 Test Street', 'South Bank', '4001', 'QLD', '2018-03-27 00:00:00', '2018-03-27 00:00:00');
+INSERT INTO `tbladdress` (`addressID`, `address`, `suburb`, `postcode`, `state`, `createDT`, `updateDT`, `userID`) VALUES
+(8, '', 'South Bank', '', 'ACT', '2018-04-13 22:59:01', '2018-04-30 15:11:57', 8),
+(9, '', '', '', 'ACT', '2018-04-16 16:11:48', '2018-04-25 18:43:05', 9),
+(10, NULL, '', '', '', '2018-04-19 23:34:08', '2018-04-19 23:34:08', 10),
+(11, NULL, '', '', '', '2018-04-29 13:21:49', '2018-04-29 13:21:49', 11),
+(12, NULL, '', '', '', '2018-04-29 13:22:40', '2018-04-29 13:22:40', 12);
 
 -- --------------------------------------------------------
 
@@ -72,7 +85,8 @@ CREATE TABLE `tblbookings` (
   `dateBooked` varchar(45) NOT NULL,
   `startTimeBooked` varchar(45) NOT NULL,
   `finishTimeBooked` varchar(45) NOT NULL,
-  `priceBooked` varchar(45) NOT NULL,
+  `priceBooked` varchar(50) NOT NULL,
+  `priceType` varchar(50) NOT NULL,
   `petBooked` varchar(45) NOT NULL,
   `isCompleted` varchar(45) NOT NULL,
   `petID` int(10) UNSIGNED NOT NULL,
@@ -87,9 +101,18 @@ CREATE TABLE `tblbookings` (
 
 CREATE TABLE `tblimagespet` (
   `imagesID` int(10) UNSIGNED NOT NULL,
-  `imageURL` varchar(150) NOT NULL,
+  `imageURL` varchar(200) NOT NULL,
   `petID` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblimagespet`
+--
+
+INSERT INTO `tblimagespet` (`imagesID`, `imageURL`, `petID`) VALUES
+(12, '../img/jap_spitz.jpg', 40),
+(13, '../img/lab.jpg', 41),
+(14, '../img/border_collie.jpg', 42);
 
 -- --------------------------------------------------------
 
@@ -99,9 +122,19 @@ CREATE TABLE `tblimagespet` (
 
 CREATE TABLE `tblimagesuser` (
   `imagesUserID` int(10) UNSIGNED NOT NULL,
-  `imageURL` varchar(45) NOT NULL,
-  `userID` int(10) UNSIGNED DEFAULT NULL
+  `imageURL` varchar(500) NOT NULL,
+  `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblimagesuser`
+--
+
+INSERT INTO `tblimagesuser` (`imagesUserID`, `imageURL`, `userID`) VALUES
+(4, '../img/FB_IMG_1512221348275.jpg', 8),
+(7, '../img/test_bookcover.jpg', 10),
+(8, '', 11),
+(9, '', 12);
 
 -- --------------------------------------------------------
 
@@ -124,12 +157,11 @@ CREATE TABLE `tbllogin` (
 --
 
 INSERT INTO `tbllogin` (`loginID`, `firstName`, `lastName`, `loginUsername`, `loginPassword`, `createDT`, `updateDT`) VALUES
-(54, 'Jessica', 'Yeoh', 'jessica.yeoh@outlook.com', '$2y$10$TiX0gp5xJdbFf3vhhIb6Lud9/FehytOsxcXzBnNX9f/Cxk5BSsX5.', '2018-03-27 10:42:11', '0000-00-00 00:00:00'),
-(55, 'Test', 'TestSurname', 'j.yo2011@hotmail.com', '$2y$10$0fO0S8ynLi2sQjxHYJTcjueD4AIEPB.S.g6AjBssCQwtnmcZPf7rK', '2018-03-27 11:05:40', '0000-00-00 00:00:00'),
-(56, 'Test2', 'Test2', 'test2@email.com', '$2y$10$Vr6nZi6TYVKNh5aF8I8SCe5bcf8jt31Z1vLLfQNinNhu40HvKtDNG', '2018-03-27 11:18:26', '0000-00-00 00:00:00'),
-(58, 'Test3', 'Test3', 'test3@email.com', '$2y$10$Xip42ALk73iq2FSe/1Sj3O22UqtkxnHEMYaSLP0LIK/OtzKXRSHfq', '2018-03-27 11:24:49', '0000-00-00 00:00:00'),
-(59, 'test4', 'test4', 'test4@email.com', '$2y$10$dXqKWC8hC/Yvd00hndAST.npwj0lv5O5dm.AyaAwi9L0BgLvMHPgi', '2018-03-27 11:28:59', '0000-00-00 00:00:00'),
-(60, 'test5', 'test5', 'test5@email.com', '$2y$10$O9ZzpU.AZGS2dGC7V.7d3Oace8fxwqImIG829qTB58hQ99aFvmgO.', '2018-03-27 11:37:08', '0000-00-00 00:00:00');
+(8, 'Jessica', 'Yeoh', 'jessica.yeoh@outlook.com', '$2y$10$FokuctNjzCxvEyyWTZzmSOGDdFGJenlMrQxsc9OBxtyhVJXYVsIrC', '2018-04-13 22:59:01', '2018-04-30 15:11:57'),
+(9, 'test', 'test', 'test@email.com', '$2y$10$51qrvgArWLgF8bvZIVdJj.HxHlHwutnzv.BpThkViF6ZoVWdbSvhu', '2018-04-16 16:11:48', '2018-04-25 18:43:05'),
+(10, 'test2', 'test2', 'test2@email.com', '$2y$10$DLeuq0Il64Mu6JODmSq9ae5Yta2LP0dfExxxF/S2w8ZiDNaXUYwoq', '2018-04-19 23:34:08', '2018-04-19 23:34:08'),
+(11, 'test3', 'test3', 'test3@email.com', '$2y$10$TxK8qBhM/RuQBQ1HYngUL.2BuZ6ccp.bNX/UwSLjk6xnnVFfGIMT.', '2018-04-29 13:21:49', '2018-04-29 13:21:49'),
+(12, 'test4', 'test4', 'test4@email.com', '$2y$10$7C3tFWfUdPyjkdGwsSmXX.l1jPQfjSCTI8Qf.UBWIS.BCeA7DO4gG', '2018-04-29 13:22:40', '2018-04-29 13:22:40');
 
 -- --------------------------------------------------------
 
@@ -149,6 +181,15 @@ CREATE TABLE `tblpet` (
   `updatePetDT` datetime NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblpet`
+--
+
+INSERT INTO `tblpet` (`petID`, `petName`, `petNickname`, `petAnimal`, `petBreed`, `petAge`, `petSize`, `createPetDT`, `updatePetDT`, `userID`) VALUES
+(40, 'Angel', NULL, 'Dog', 'Japanese Spitz', '1', 'Small', '2018-04-29 16:35:40', '2018-04-29 16:35:40', 8),
+(41, 'Bob', NULL, 'Dog', 'Labrador', '3', 'Large', '2018-04-29 16:36:40', '2018-04-29 16:36:40', 8),
+(42, 'Max', NULL, 'Dog', 'German Shepard', '2', 'Large', '2018-04-29 16:38:40', '2018-04-29 16:38:40', 8);
 
 -- --------------------------------------------------------
 
@@ -173,10 +214,10 @@ CREATE TABLE `tblreviews` (
 CREATE TABLE `tbluser` (
   `userID` int(10) UNSIGNED NOT NULL,
   `phone` varchar(10) NOT NULL,
-  `userType` varchar(50) DEFAULT NULL,
+  `isOwner` varchar(10) DEFAULT NULL,
+  `isCustomer` varchar(10) DEFAULT NULL,
   `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updateDT` datetime NOT NULL,
-  `addressID` int(10) UNSIGNED DEFAULT NULL,
   `loginID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -184,8 +225,12 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`userID`, `phone`, `userType`, `createDT`, `updateDT`, `addressID`, `loginID`) VALUES
-(7, '0490203940', 'Admin', '2018-03-27 11:00:41', '2018-03-27 11:00:00', 1, 54);
+INSERT INTO `tbluser` (`userID`, `phone`, `isOwner`, `isCustomer`, `createDT`, `updateDT`, `loginID`) VALUES
+(8, '0492018394', '', 'YES', '2018-04-13 22:59:01', '2018-04-30 15:11:57', 8),
+(9, '', '', 'YES', '2018-04-16 16:11:48', '2018-04-25 18:43:05', 9),
+(10, '', '', '', '2018-04-19 23:34:08', '2018-04-19 23:34:08', 10),
+(11, '', '', '', '2018-04-29 13:21:49', '2018-04-29 13:21:49', 11),
+(12, '', '', '', '2018-04-29 13:22:40', '2018-04-29 13:22:40', 12);
 
 --
 -- Indexes for dumped tables
@@ -202,7 +247,8 @@ ALTER TABLE `tblad`
 -- Indexes for table `tbladdress`
 --
 ALTER TABLE `tbladdress`
-  ADD PRIMARY KEY (`addressID`);
+  ADD PRIMARY KEY (`addressID`),
+  ADD KEY `fk_tbladdress_tbluser1_idx` (`userID`);
 
 --
 -- Indexes for table `tblbookings`
@@ -224,7 +270,7 @@ ALTER TABLE `tblimagespet`
 --
 ALTER TABLE `tblimagesuser`
   ADD PRIMARY KEY (`imagesUserID`),
-  ADD KEY `fk_tblImagesUser_tblUser1_idx` (`userID`);
+  ADD KEY `fk_tblimagesuser_tbluser1_idx` (`userID`);
 
 --
 -- Indexes for table `tbllogin`
@@ -253,7 +299,6 @@ ALTER TABLE `tblreviews`
 --
 ALTER TABLE `tbluser`
   ADD PRIMARY KEY (`userID`),
-  ADD KEY `fk_tblUser_tblAddress1_idx` (`addressID`),
   ADD KEY `fk_tblUser_tbllogin1_idx` (`loginID`);
 
 --
@@ -264,43 +309,43 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tblad`
 --
 ALTER TABLE `tblad`
-  MODIFY `adID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `adID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbladdress`
 --
 ALTER TABLE `tbladdress`
-  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblbookings`
 --
 ALTER TABLE `tblbookings`
-  MODIFY `bookingsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `bookingsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblimagespet`
 --
 ALTER TABLE `tblimagespet`
-  MODIFY `imagesID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `imagesID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tblimagesuser`
 --
 ALTER TABLE `tblimagesuser`
-  MODIFY `imagesUserID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `imagesUserID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbllogin`
 --
 ALTER TABLE `tbllogin`
-  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblpet`
 --
 ALTER TABLE `tblpet`
-  MODIFY `petID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `petID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tblreviews`
@@ -312,7 +357,7 @@ ALTER TABLE `tblreviews`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -325,6 +370,12 @@ ALTER TABLE `tblad`
   ADD CONSTRAINT `fk_tblad_tblpet1` FOREIGN KEY (`petID`) REFERENCES `tblpet` (`petID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `tbladdress`
+--
+ALTER TABLE `tbladdress`
+  ADD CONSTRAINT `fk_tbladdress_tbluser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tblbookings`
 --
 ALTER TABLE `tblbookings`
@@ -335,33 +386,32 @@ ALTER TABLE `tblbookings`
 -- Constraints for table `tblimagespet`
 --
 ALTER TABLE `tblimagespet`
-  ADD CONSTRAINT `fk_tblimages_tblpet1` FOREIGN KEY (`petID`) REFERENCES `tblpet` (`petID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tblimages_tblpet1` FOREIGN KEY (`petID`) REFERENCES `tblpet` (`petID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblimagesuser`
 --
 ALTER TABLE `tblimagesuser`
-  ADD CONSTRAINT `fk_tblImagesUser_tblUser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tblimagesuser_tbluser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblpet`
 --
 ALTER TABLE `tblpet`
-  ADD CONSTRAINT `fk_tblpet_tblUser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tblpet_tblUser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tblreviews`
 --
 ALTER TABLE `tblreviews`
-  ADD CONSTRAINT `fk_tblReviews_tblUser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tblReviews_tblpet1` FOREIGN KEY (`petID`) REFERENCES `tblpet` (`petID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tblReviews_tblUser1` FOREIGN KEY (`userID`) REFERENCES `tbluser` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tblReviews_tblpet1` FOREIGN KEY (`petID`) REFERENCES `tblpet` (`petID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  ADD CONSTRAINT `fk_tblUser_tblAddress1` FOREIGN KEY (`addressID`) REFERENCES `tbladdress` (`addressID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_tblUser_tbllogin1` FOREIGN KEY (`loginID`) REFERENCES `tbllogin` (`loginID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_tblUser_tbllogin1` FOREIGN KEY (`loginID`) REFERENCES `tbllogin` (`loginID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

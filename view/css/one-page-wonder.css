@@ -196,6 +196,53 @@ header.masthead .bg-circle-4 {
 }
 /*****************************END Post Ad Page****************************************/
 
+
+/************Post an ad IMAGES*************/
+#image_table{
+    width: 100%;
+    height: auto;
+    border: 1px solid gray;
+    margin-bottom: 15px;
+  }
+
+  .image_container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+  }
+
+  .image_delete{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+  }
+
+  .img-thumbnail{
+    width: 100px;
+    height: 100px !important;
+  }
+
+  .delete_button{
+    width: 100%;
+    text-align: center;
+  }
+
+  .delete_button button{
+    width: 25px;
+    height: 25px;
+    padding: 0;
+  }
+/************END Post an ad IMAGES*************/
+
+
 /*************************START LOGGED IN PROFILE UPDATE Page*****************************/
 
 #loggedin_page{
@@ -433,6 +480,16 @@ header.masthead .bg-circle-4 {
   margin-bottom: 50px;
 }
 
+#price_radios{
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding-top: 15px;
+}
+
+.create-booking{
+  padding-right: 1em;
+}
 /*************************FINISH LOGGED IN PROFILE UPDATE Page*****************************/
 
 /*******************************BROWSE ADS PAGE**********************************/
@@ -445,14 +502,17 @@ header.masthead .bg-circle-4 {
 
 
 /*******************************PET PROFILES PAGE***********************************/
-#pet_profiles_container{
+#pet_profiles_container,
+#ads_container,
+#single_ad{
   width: 100%;
   height: auto;
   position: relative;
   top: 100px;
 }
 
-#pet_profiles{
+#pet_profiles,
+#individual_ad{
   display: grid;
   width: 100%;
   height: auto;
@@ -463,27 +523,30 @@ header.masthead .bg-circle-4 {
   grid-template-columns: auto auto auto;
 }
 
-#pet_profiles_update_form{
-  width: 250px;
+#pet_profiles_update_form,
+#show_ads{
+  width: 300px;
   height: auto;
   border: 1px solid blue;
   border-radius: 5px;
   padding: 15px;
 }
 
-#pet_info{
+#pet_info, #ad_info{
   display: grid;
 }
 
-      .pet_info_label{
+      .pet_info_label,
+      .ad_info_label{
         grid-column: 1;
         text-align: right;
-        padding-right: 10px;
+        padding-right: 20px;
         font-weight: bold;
         margin: 0;
       }
 
-      .pet_info_value{
+      .pet_info_value,
+      .ad_info_value{
         grid-column: 2;
         margin: 0;
       }
@@ -530,15 +593,7 @@ footer{
 }
 
 
-
-
-
-
-
-
-
-
-
+/*********************Login/Register page***************************/
 html,body {
 	height: 100%;
 }
@@ -605,6 +660,9 @@ body.my-login-page {
 	color: #888;
 	text-align: center;
 }
+
+/*********************END Login/Register page***************************/
+
 
 /***************************REGISTER ACCOUNT PAGE*******************************/
 #register_section2{

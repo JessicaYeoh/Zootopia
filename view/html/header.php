@@ -32,9 +32,7 @@ $RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos(
         echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">';
 
         // Zootopia CSS
-        echo '<link href=" ';
-        echo $RootDir;
-        echo '/view/css/one-page-wonder.css" rel="stylesheet">';
+        echo '<link href="../css/one-page-wonder.css" rel="stylesheet">';
 
         // Custom fonts for this template
         echo '<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">';
@@ -59,6 +57,8 @@ $RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos(
               integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
               crossorigin="anonymous"></script>';
 
+        echo'<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.4/svg.min.js"> </script>';
+
         // jQuery date picker JS
         echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>';
 
@@ -73,9 +73,7 @@ $RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos(
         echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>';
 
         // Zootopia JS
-        echo '<script src=" ';
-        echo $RootDir;
-        echo '/view/js/zootopia.js"> </script>';
+        echo '<script src="../js/zootopia.js"> </script>';
 
 
    ?>

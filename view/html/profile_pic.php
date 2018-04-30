@@ -23,7 +23,7 @@ $userPictureURL = $userPicture;
           <div class="img-relative">
               <!-- Loading image -->
               <div class="overlay uploadProcess" style="display: none;">
-                <div class="overlay-content"><img src="../img/loading.gif"/></div>
+                <div class="overlay-content"><img src="../img/loader.svg"/></div>
               </div>
               <!-- Hidden upload form -->
               <form method="post" action="../../controller/upload_userimg.php" enctype="multipart/form-data" id="picUploadForm" target="uploadTarget">

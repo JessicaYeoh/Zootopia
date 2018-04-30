@@ -38,6 +38,36 @@ $login_ID = $_GET['loginID'];
                       <input class="form-control" id="book_date" name="book_date" placeholder="DD/MM/YYYY" type="text" value="<?php ?>" required/>
                   </div>
               </div>
+
+              <div class="form-group col-md-6">
+                <div class="form-group">
+                  <label for="pet">Pet</label>
+
+                  <?php
+
+                  $userID = $_SESSION['userID'];
+
+                        $showPet = "SELECT * FROM tblpet WHERE userID = :uid;";
+                        $stmt = $conn->prepare($showPet);
+                        $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        $no_of_pets = $stmt->rowCount();
+                  ?>
+
+                  <select id="pet" class="form-control" name="pet" required>
+                      <?php
+                      for($i=0;$i<$no_of_pets;$i++){
+                      ?>
+                    <option><?php echo $result[$i]['petName']; ?></option>
+                      <?php
+                      }
+                      ?>
+                  </select>
+
+                </div>
+              </div>
             </div>
 
             <div class="form-row">
@@ -65,44 +95,30 @@ $login_ID = $_GET['loginID'];
             </div>
 
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <div class="form-group">
-              <label for="agreed_price">Price</label>
-              <input id="agreed_price" type="text" class="form-control" name="agreed_price" value="<?php ?>" required placeholder="$0.00">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="agreed_price">Price</label>
+                  <input id="agreed_price" type="text" class="form-control" name="agreed_price" value="<?php ?>" required placeholder="$0.00">
+              </div>
+
+              <div class="form-group col-md-6" id="price_radios">
+                  <div class="form-check create-booking">
+                    <label class="form-check-label" for="priceType">
+                      <input type="radio" class="form-check-input" name="priceType" id="optionsRadios1" value="Hourly" checked>
+                      Hourly
+                    </label>
+                  </div>
+                  <div class="form-check create-booking">
+                    <label class="form-check-label" for="priceType">
+                      <input type="radio" class="form-check-input" name="priceType" id="optionsRadios2" value="Per Person">
+                      Per Person
+                    </label>
+                  </div>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group col-md-6">
-            <div class="form-group">
-              <label for="pet">Pet</label>
 
-<?php
 
-$userID = $_SESSION['userID'];
-
-              $showPet = "SELECT * FROM tblpet WHERE userID = :uid;";
-              $stmt = $conn->prepare($showPet);
-              $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
-              $stmt->execute();
-              $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-              $no_of_pets = $stmt->rowCount();
-?>
-
-              <select id="pet" class="form-control" name="pet" required>
-                  <?php
-                  for($i=0;$i<$no_of_pets;$i++){
-                  ?>
-                <option><?php echo $result[$i]['petName']; ?></option>
-                  <?php
-                  }
-                  ?>
-              </select>
-
-            </div>
-          </div>
-        </div>
 
             <input type="hidden" name="action_type" value="add"/>
 

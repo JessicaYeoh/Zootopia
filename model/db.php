@@ -114,6 +114,20 @@ function update_pet($postdata, $pet_ID) {
     return true;
 }
 
+function getOneAd($ad_ID){
+  $conn = connect();
+  $showAd = "SELECT * FROM tblad
+  INNER JOIN tbladimages ON tblad.adID = tbladimages.adID
+  INNER JOIN tblpet ON tblpet.petID = tblad.petID
+  INNER JOIN tbluser ON tbluser.userID = tblpet.userID
+  INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
+  WHERE tblad.adID = :aid;";
+  $stmt = $conn->prepare($showAd);
+  $stmt->bindParam(':aid', $ad_ID, PDO::PARAM_INT);
+  $stmt->execute();
+  return $result = $stmt->fetch(PDO::FETCH_ASSOC);
+};
+
 function test_user_input($data) {
 	$conn = connect();
 	$data = trim($data);
@@ -146,7 +160,7 @@ function register(){
 
               if($stmt->rowCount() > 0) {
                  $_SESSION['error'] = 'User already exists!';
-                 header('Location: http://localhost/zootopia/view/my-login-master/register.php');
+                 header('Location: ../view/my-login-master/register.php');
 
               } else {
 
@@ -194,7 +208,7 @@ function register(){
                 $_SESSION['userID'] = $result['userID'];
 
 
-                header('Location: http://localhost/zootopia/view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
+                header('Location: ../view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
               }
           }
         }
@@ -224,10 +238,10 @@ function login(){
             $_SESSION['loginID'] = $result['loginID'];
             $_SESSION['username'] = $username;
             $_SESSION['userID'] = $result['userID'];
-            header('Location: http://localhost/zootopia/view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
+            header('Location: ../view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
           } else {
             $_SESSION['error'] = "Login invalid please try again";
-            header('Location: http://localhost/zootopia/view/my-login-master/login_page.php');
+            header('Location: ../view/my-login-master/login_page.php');
           }
       }
       catch(PDOException $e) {
