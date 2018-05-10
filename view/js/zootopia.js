@@ -402,10 +402,11 @@ function checkPet() {
 
 
 // AJAX post ad
+// $("#ad_form").submit(function(e) {
+//   e.preventDefault()
 function addAd(login_ID) {
 
     var petID = $( "#pet_ad option:selected" ).val();
-
     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
 
       $.ajax(
@@ -415,7 +416,6 @@ function addAd(login_ID) {
           data: $('#ad_form').serialize(),
           datatype: 'json',
           success:function(result) {
-            console.log(result);
             if(result.petAd == false){
               alert("Pet ad already exists!");
             }else{
@@ -423,21 +423,16 @@ function addAd(login_ID) {
               $('#image_table').hide();
             }
 
-            // if(petID){
-            //   alert("Pet ad already exists!");
-            // }else{
-            //   alert("Ad posted!");
-            //   $('#image_table').hide();
-            // }
           },
           error: function(error) {
-              alert(error);
-              console.log(error);
+              alert("error");
             }
         }
       );
 
 }
+
+// });
 // END AJAX post ad
 
 $(document).ready(function(){

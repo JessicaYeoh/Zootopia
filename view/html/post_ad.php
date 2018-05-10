@@ -92,7 +92,7 @@ include 'nav.php';
                     $no_of_pets = $stmt->rowCount();
                     ?>
 
-                    <select id="pet_ad" class="form-control select stored" name="pet_ad" required onchange="checkPet();">
+                    <select id="pet_ad" class="form-control select" name="pet_ad" required onchange="checkPet();">
                         <?php
                         for($i=0;$i<$no_of_pets;$i++){
                         ?>
@@ -116,7 +116,7 @@ include 'nav.php';
 
                 <div class="form-group">
                   <label for="booking_type">What type of booking is allowed for your pet?</label>
-                  <select name="booking_type" id="booking_type_ad" class="form-control select stored" required>
+                  <select name="booking_type" id="booking_type_ad" class="form-control select" required>
                     <option>Owner Supervised</option>
                     <option>Private</option>
                     <option>Owner Supervised OR Private</option>
@@ -166,14 +166,14 @@ include 'nav.php';
 
                   <input type="hidden" name="action_type" value="add"/>
 
+<!-- <input type="submit" id="ad_button" class="btn btn-primary" value="Post ad"/> -->
+
 <input type="button" id="ad_button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
-
-
-<!-- <button type="submit">Post ad</button> -->
 
             </div>
 
     </form>
+
 
   </div>
 
@@ -191,7 +191,7 @@ if(localStorage){
     $('.stored').phoenix({
       webStorage: 'sessionStorage'
     })
-    $('#ad_button').click(function(e){
+    $('#ad_form').submit(function(e){
       $('.stored').phoenix('remove')
       sessionStorage.removeItem('pet_ad');
       sessionStorage.removeItem('booking_type_ad');

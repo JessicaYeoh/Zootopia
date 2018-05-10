@@ -20,25 +20,25 @@
 
                     <div class="form-group">
                       <label for="first_name">First Name</label>
-                      <input id="first_name" type="text" class="form-control" name="first_name" required>
+                      <input id="first_name" type="text" class="form-control" name="first_name" required pattern="^\p{Lu}\p{L}+(?:[\s,.'-]\p{L}+)?$" oninvalid="setCustomValidity('Incorrect format! First letter must be uppercase.')" oninput="setCustomValidity('')">
                     </div>
 
                     <div class="form-group">
                       <label for="last_name">Last Name</label>
-                      <input id="last_name" type="text" class="form-control" name="last_name" required>
+                      <input id="last_name" type="text" class="form-control" name="last_name" required pattern="^\p{Lu}\p{L}+(?:[\s,.'-]\p{L}+)?$" oninvalid="setCustomValidity('Incorrect format! First letter must be uppercase.')" oninput="setCustomValidity('')">
                     </div>
 
 
     								<div class="form-group">
     									<label for="username">E-mail Address</label>
-    									<input id="username" type="email" class="form-control" name="username" onkeyup="checkemail();" />
+    									<input id="username" type="email" class="form-control" name="username" onkeyup="checkemail();" required/>
     								</div>
 
               <div id="user_errDiv2"></div>
 
     								<div class="form-group">
     									<label for="password">Password</label>
-    									<input id="password" type="password" class="form-control" name="password" data-eye>
+    									<input id="password" type="password" class="form-control" name="password" data-eye required>
     								</div>
 
     								<div class="form-group">
