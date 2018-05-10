@@ -58,11 +58,11 @@ if(isset($_SESSION['login']) && $_SESSION['login'] == true):
 else:
 
       echo '<li class="nav-item">
-              <a class="nav-link" href="../my-login-master/register.php">Sign Up</a>
+              <a class="nav-link" href="register.php">Sign Up</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="../my-login-master/login_page.php">Log In</a>
+              <a class="nav-link" href="login_page.php">Log In</a>
             </li> ';
 
 endif;

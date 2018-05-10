@@ -174,7 +174,7 @@ function register(){
 
               if($stmt->rowCount() > 0) {
                  $_SESSION['error'] = 'User already exists!';
-                 header('Location: ../view/my-login-master/register.php');
+                 header('Location: ../view/html/register.php');
 
               } else {
 
@@ -221,18 +221,32 @@ function register(){
                 $_SESSION['username'] = $username;
                 $_SESSION['userID'] = $result['userID'];
 
-
                 header('Location: ../view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
               }
           }
         }
           catch(PDOException $e)
           {
-            echo "Error: ".$e -> getMessage();
-            die();
+            $error_message = $e->getMessage();
+
+
+            echo'<h1>Registration error</h1>
+                 <p>There was an error while trying to register your account!</p>
+                 <p>Error message:';
+                 echo $error_message;
+            echo'</p>';
+
+
+          die();
           }
       }
-  }
+    }
+
+
+
+
+
+
 
 function login(){
   $conn = connect();
@@ -255,15 +269,12 @@ function login(){
             header('Location: ../view/html/loggedin_page.php?loginID='.$_SESSION['loginID'].'');
           } else {
             $_SESSION['error'] = "Login invalid please try again";
-            header('Location: ../view/my-login-master/login_page.php');
+            header('Location: ../view/html/login_page.php');
           }
       }
       catch(PDOException $e) {
-        echo "Account creation problems".$e -> getMessage();
+        echo "Account login problems".$e -> getMessage();
         die();
       }
     }
 }
-
-
-?>
