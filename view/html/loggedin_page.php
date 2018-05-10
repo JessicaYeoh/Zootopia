@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['login']){
-  header("location:../my-login-master/login_page.php");
+  header("location:login_page.php");
   die;
 }
 ?>
@@ -36,4 +36,24 @@ $login_ID = $_GET['loginID'];
 
 <?php include "footer.php";?>
 
+  <script type="text/javascript">
+  // localstorage for add pet modal
+      if(localStorage){
+        $(document).ready(function(){
+          $('.stored').phoenix()
+          $('#pet_profile_update_form').submit(function(e){
+              $('.stored').phoenix('remove');
+              sessionStorage.removeItem('pet_size');
+          });
+
+          $('.select').change(function() {
+              sessionStorage.setItem(this.id, this.value);
+          }).val(function() {
+              return sessionStorage.getItem(this.id)
+          });
+        });
+      } else{
+          alert("Sorry, your browser do not support local storage.");
+      }
+  </script>
 </body>

@@ -48,7 +48,7 @@ $conn = connect();
               $stmt->execute();
 
 // fix rule to add more than one pet
-              if($stmt->rowCount() < 0) {
+              if($stmt->rowCount() < 1) {
                 echo 'failed to add';
               } else {
                 $_SESSION['message'] = "New pet added!";

@@ -166,9 +166,7 @@ include 'nav.php';
 
                   <input type="hidden" name="action_type" value="add"/>
 
-<!-- <input type="submit" id="ad_button" class="btn btn-primary" value="Post ad"/> -->
-
-<input type="button" id="ad_button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
+                  <input type="button" id="ad_button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
 
             </div>
 
@@ -188,10 +186,8 @@ include 'nav.php';
 
 if(localStorage){
   $(document).ready(function(){
-    $('.stored').phoenix({
-      webStorage: 'sessionStorage'
-    })
-    $('#ad_form').submit(function(e){
+    $('.stored').phoenix()
+    $('#ad_button').click(function(e){
       $('.stored').phoenix('remove')
       sessionStorage.removeItem('pet_ad');
       sessionStorage.removeItem('booking_type_ad');

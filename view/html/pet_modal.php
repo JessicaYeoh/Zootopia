@@ -121,13 +121,10 @@ if($result['isOwner'] == "YES") {
             </form>
 
           </div>
-
         </div>
       </div>
     </div>
     <!-- END add pet modal -->
-
-
 <?php
 }else{
 ?>
@@ -155,25 +152,3 @@ if($result['isOwner'] == "YES") {
 <?php
 }
 ?>
-
-<script type="text/javascript">
-    if(localStorage){
-      $(document).ready(function(){
-        $('.stored').phoenix({
-          webStorage: 'sessionStorage'
-        })
-        $('#add_pet_button').click(function(e){
-          $('.stored').phoenix('remove')
-          sessionStorage.removeItem('pet_size');
-        });
-
-        $('.select').change(function() {
-            sessionStorage.setItem(this.id, this.value);
-        }).val(function() {
-            return sessionStorage.getItem(this.id)
-        });
-      });
-    } else{
-        alert("Sorry, your browser do not support local storage.");
-    }
-</script>

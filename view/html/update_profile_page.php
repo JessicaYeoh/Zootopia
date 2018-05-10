@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['login']){
-  header("location:../my-login-master/login_page.php");
+  header("location:login_page.php");
   die;
 }
 
@@ -44,21 +44,14 @@ $cust = $updateProfile['isCustomer'];
   <div id="profile_update_container">
     <form id="profile_update_form">
 
-        <!-- <div id="profile_form_section"> -->
-
-          <!-- <div class="form-group">
-              <label for="profile_avatar">Choose avatar</label>
-              <input type="file" class="form-control-file" id="profile_avatar" aria-describedby="fileHelp" name="avatar">
-          </div> -->
-
           <div class="form-group">
             <label for="profile_first_name">First Name</label>
-            <input type="text" class="form-control" id="profile_first_name" name="fname" value="<?php echo $firstName; ?>" required>
+            <input type="text" class="form-control stored" id="profile_first_name" name="fname" value="<?php echo $firstName; ?>" required>
           </div>
 
           <div class="form-group">
             <label for="profile_last_name">Last Name</label>
-            <input type="text" class="form-control" id="profile_last_name" name="lname" value="<?php echo $surname; ?>" required>
+            <input type="text" class="form-control stored" id="profile_last_name" name="lname" value="<?php echo $surname; ?>" required>
           </div>
 
           <div class="form-group">
@@ -78,7 +71,7 @@ $cust = $updateProfile['isCustomer'];
 
           <div class="form-group">
             <label for="state">State</label>
-            <select id="state_select" class="select2 stored" name="state" required>
+            <select id="state_select" class="select2" name="state" required>
               <option value="ACT" <?php if($state=="ACT") echo "selected"; ?>>ACT</option>
               <option value="NSW" <?php if($state=="NSW") echo "selected"; ?>>NSW</option>
               <option value="NT" <?php if($state=="NT") echo "selected"; ?>>NT</option>
@@ -134,9 +127,7 @@ $cust = $updateProfile['isCustomer'];
     if(localStorage){
       $(document).ready(function(){
 
-        $('.stored').phoenix({
-          webStorage: 'sessionStorage'
-        })
+        $('.stored').phoenix()
         $('#profile_button').click(function(e){
           $('.stored').phoenix('remove')
         });

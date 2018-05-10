@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['login']){
-  header("location:../my-login-master/login_page.php");
+  header("location:login_page.php");
   die;
 }
 
@@ -27,7 +27,12 @@ $conn = connect();
         if(!isset($_SESSION['message'])){
           $_SESSION['message'] = "";
         }else{
-        echo $_SESSION['message'];
+        echo '<script>
+                alert("';
+                echo $_SESSION['message'];
+                echo '")';
+        echo '</script>';
+
         unset ($_SESSION['message']);
         }
         ?>

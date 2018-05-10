@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['login']){
-  header("location:../my-login-master/login_page.php");
+  header("location:login_page.php");
   die;
 }
 ?>

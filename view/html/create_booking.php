@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION['login']){
-  header("location:../my-login-master/login_page.php");
+  header("location:login_page.php");
   die;
 }
 
@@ -141,12 +141,10 @@ $login_ID = $_GET['loginID'];
 
 if(localStorage){
   $(document).ready(function(){
-    $('.stored').phoenix({
-      webStorage: 'sessionStorage'
-    })
+    $('.stored').phoenix();
     $('#booking_button').click(function(e){
-      $('.stored').phoenix('remove');
-      sessionStorage.removeItem('pet');
+        $('.stored').phoenix('remove');
+        sessionStorage.removeItem('pet');
     });
 
     $('#pet').change(function() {
