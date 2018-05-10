@@ -44,8 +44,7 @@
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFlroMXsGgmRsAgtSmtBqpBLYzpyAWP7Q&callback=myMap"></script>
 
-        <!-- jQuery form validation (username & pw) -->
-        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 
         <!-- Javascript/jQuery -->
         <!-- <script src="../vendor/jquery/jquery.min.js"></script> -->
@@ -53,6 +52,9 @@
         <script src="http://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+
+        <!-- jQuery form validation (username & pw) -->
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
         <script src="../vendor/phoenix/jquery.phoenix.js" type="text/javascript"></script>
 
