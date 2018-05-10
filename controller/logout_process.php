@@ -11,8 +11,8 @@
     // unset($_SESSION['username']);
     // unset($_SESSION['userID']);
     // unset($_SESSION['message']);
-
-    session_destroy();
+    session_unset();
+    // session_destroy();
 
     header('Location: ../index.php');
 ?>

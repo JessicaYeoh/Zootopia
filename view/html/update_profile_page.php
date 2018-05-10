@@ -24,9 +24,15 @@ $postcode = $updateProfile['postcode'];
 $state = $updateProfile['state'];
 $email = $updateProfile['loginUsername'];
 $phone = $updateProfile['phone'];
+$owner = $updateProfile['isOwner'];
+$cust = $updateProfile['isCustomer'];
 ?>
 
+
+
 <div id="update_profile_page">
+
+<div class="loader"><img src="../img/loader.svg"/></div>
 
   <div id="profile_nav">
     <?php include 'loggedin_nav.php';?>
@@ -57,29 +63,29 @@ $phone = $updateProfile['phone'];
 
           <div class="form-group">
             <label for="address">Address (optional)</label>
-            <input id="address" type="text" class="form-control" name="address" value="<?php echo $address; ?>">
+            <input id="address" type="text" class="form-control stored" name="address" value="<?php echo $address; ?>">
           </div>
 
           <div class="form-group">
             <label for="suburb">Suburb</label>
-            <input id="suburb" type="text" class="form-control" name="suburb" value="<?php echo $suburb; ?>" required>
+            <input id="suburb" type="text" class="form-control stored" name="suburb" value="<?php echo $suburb; ?>" required>
           </div>
 
           <div class="form-group">
             <label for="postcode">Postcode</label>
-            <input id="postcode" type="text" class="form-control" name="postcode" required value="<?php echo $postcode; ?>">
+            <input id="postcode" type="text" class="form-control stored" name="postcode" required value="<?php echo $postcode; ?>">
           </div>
 
           <div class="form-group">
             <label for="state">State</label>
-            <select id="state_select" name="state" required value="<?php echo $state; ?>">
-              <option>ACT</option>
-              <option>NSW</option>
-              <option>NT</option>
-              <option>QLD</option>
-              <option>TAS</option>
-              <option>VIC</option>
-              <option>WA</option>
+            <select id="state_select" class="select2 stored" name="state" required>
+              <option value="ACT" <?php if($state=="ACT") echo "selected"; ?>>ACT</option>
+              <option value="NSW" <?php if($state=="NSW") echo "selected"; ?>>NSW</option>
+              <option value="NT" <?php if($state=="NT") echo "selected"; ?>>NT</option>
+              <option value="QLD" <?php if($state=="QLD") echo "selected"; ?>>QLD</option>
+              <option value="TAS" <?php if($state=="TAS") echo "selected"; ?>>TAS</option>
+              <option value="VIC" <?php if($state=="VIC") echo "selected"; ?>>VIC</option>
+              <option value="WA" <?php if($state=="WA") echo "selected"; ?>>WA</option>
             </select>
           </div>
 
@@ -90,7 +96,7 @@ $phone = $updateProfile['phone'];
 
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input id="phone" type="text" class="form-control" name="phone" value="<?php echo $phone; ?>">
+            <input id="phone" type="text" class="form-control stored" name="phone" value="<?php echo $phone; ?>">
           </div>
 
           <!-- <div class="form-group">
@@ -101,18 +107,18 @@ $phone = $updateProfile['phone'];
           <label> On Zootopia I want to:</label>
           <div class="form-check">
             <label class="form-check-label" for="customer">
-              <input id="customer" class="form-check-input" type="checkbox" store="checkbox1" value="YES" name="customer">
+              <input id="customer" class="form-check-input stored" type="checkbox" value="YES" name="customer" <?php if($cust=="YES") echo "checked"; ?>>
               Visit pets (make bookings)
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label" for="owner">
-              <input id="owner" class="form-check-input" type="checkbox" store="checkbox2" value="YES" name="owner">
+              <input id="owner" class="form-check-input stored" type="checkbox" value="YES" name="owner" <?php if($owner=="YES") echo "checked"; ?>>
               Earn money (post pet ads)
             </label>
           </div>
 
-          <input type="button" value="Update" onclick="showMsg(<?php echo $login_ID;?>)"/>
+          <input type="button" id="profile_button" value="Update" onclick="showMsg(<?php echo $login_ID;?>)"/>
 
 
           <div id="message"></div>
@@ -124,35 +130,21 @@ $phone = $updateProfile['phone'];
 
 
 <script>
-    (function() {
-        var boxes = document.querySelectorAll("input[type='checkbox']");
-        for (var i = 0; i < boxes.length; i++) {
-            var box = boxes[i];
-            if (box.hasAttribute("store")) {
-                setupBox(box);
-            }
-        }
 
-        function setupBox(box) {
-            var storageId = box.getAttribute("store");
-            var oldVal    = localStorage.getItem(storageId);
-            console.log(oldVal);
-            box.checked = oldVal === "true" ? true : false;
+    if(localStorage){
+      $(document).ready(function(){
 
-            box.addEventListener("change", function() {
-                localStorage.setItem(storageId, this.checked);
-            });
-        }
-
-// localstorage state selection
-        $('#state_select').change(function() {
-            localStorage.setItem('state', this.value);
+        $('.stored').phoenix({
+          webStorage: 'sessionStorage'
+        })
+        $('#profile_button').click(function(e){
+          $('.stored').phoenix('remove')
         });
-        if(localStorage.getItem('state')){
-            $('#state_select').val(localStorage.getItem('state'));
-        }
-    })();
 
+      });
+    } else{
+        alert("Sorry, your browser do not support local storage.");
+    }
 </script>
 
 </body>

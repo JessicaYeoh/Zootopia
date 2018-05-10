@@ -30,6 +30,8 @@ $img = $petProf['imageURL'];
 
 <div id="pet_profile_page2">
 
+<div class="loader"><img src="../img/loader.svg"/></div>
+
   <div id="booking_nav">
     <?php include 'loggedin_nav.php';?>
   </div>
@@ -72,37 +74,37 @@ $img = $petProf['imageURL'];
 
         <div class="form-group">
           <label for="pet_name">Pet Name</label>
-          <input type="text" class="form-control" id="pet_name" name="pet_name" value="<?php echo $petName;?>" required>
+          <input type="text" class="form-control stored" id="pet_name" name="pet_name" value="<?php echo $petName;?>" required>
         </div>
 
         <div class="form-group">
           <label for="animal_type">Animal type</label>
-          <input type="text" class="form-control" id="animal_type" name="animal_type" value="<?php echo $aniType;?>" required>
+          <input type="text" class="form-control stored" id="animal_type" name="animal_type" value="<?php echo $aniType;?>" required>
         </div>
 
         <div class="form-group">
           <label for="breed_type">Breed type</label>
-          <input id="breed_type" type="text" class="form-control" name="breed_type" value="<?php echo $breed;?>" required>
+          <input id="breed_type" type="text" class="form-control stored" name="breed_type" value="<?php echo $breed;?>" required>
         </div>
 
         <div class="form-group">
           <label for="pet_age">Pet age</label>
-          <input id="pet_age" type="text" class="form-control" name="pet_age" value="<?php echo $age;?>" required>
+          <input id="pet_age" type="text" class="form-control stored" name="pet_age" value="<?php echo $age;?>" required>
         </div>
 
         <div class="form-group">
           <label for="pet_size">Pet size</label>
-          <select class="" id="pet_size" name="pet_size" value="<?php echo $size;?>" required>
-            <option>Small</option>
-            <option>Medium</option>
-            <option>Large</option>
+          <select class="stored" id="pet_size" name="pet_size" required>
+            <option value="Small" <?php if($size=="Small") echo "selected";?>>Small</option>
+            <option value="Medium" <?php if($size=="Medium") echo "selected";?>>Medium</option>
+            <option value="Large" <?php if($size=="Large") echo "selected";?>>Large</option>
           </select>
         </div>
 
         <input type="hidden" name="action_type" value="add"/>
 
         <div class="modal-footer">
-            <input type="button" class="btn btn-primary" value="Update" onclick="updatePet(<?php echo $pet_ID;?>)"/>
+            <input type="button" id="update_pet_button" class="btn btn-primary" value="Update" onclick="updatePet(<?php echo $pet_ID;?>)"/>
         </div>
 
       </form>

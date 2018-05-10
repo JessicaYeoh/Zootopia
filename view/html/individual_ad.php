@@ -78,3 +78,7 @@ $img = $adInfo['image_name'];
 <button class="btn btn-primary">Book Now</button>
 
 </div>
+
+<?php
+include 'footer.php';
+?>

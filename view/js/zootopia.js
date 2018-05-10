@@ -79,24 +79,28 @@ $(function() { //shorthand of $(document).ready(function() { ... });
 });
 
 
-// FUNCTIONS TO SHOW/HIDE POST AN AD SECTION
-function showSection1(){
-    document.getElementById('ad_form_section1').style.display = 'block';
-    document.getElementById('ad_form_section2').style.display = 'none';
-    document.getElementById('ad_form_section3').style.display = 'none';
-}
+$(function() {
+    $("#ad_section2").click(function(){
+        $("#ad_form_section1").hide();
+        $("#ad_form_section2").show();
+    });
 
-function showSection2(){
-    document.getElementById('ad_form_section1').style.display = 'none';
-    document.getElementById('ad_form_section2').style.display = 'block';
-    document.getElementById('ad_form_section3').style.display = 'none';
-}
+    $("#back_section1").click(function(){
+        $("#ad_form_section1").show();
+        $("#ad_form_section2").hide();
+    });
 
-function showSection3(){
-  document.getElementById('ad_form_section1').style.display = 'none';
-  document.getElementById('ad_form_section2').style.display = 'none';
-  document.getElementById('ad_form_section3').style.display = 'block';
-}
+    $("#ad_section3").click(function(){
+        $("#ad_form_section3").show();
+        $("#ad_form_section2").hide();
+    });
+
+    $("#back_section2").click(function(){
+        $("#ad_form_section2").show();
+        $("#ad_form_section3").hide();
+    });
+});
+
 // END OF FUNCTIONS TO SHOW/HIDE POST AN AD SECTION
 
 // Update profile function
@@ -116,11 +120,13 @@ function showMsg(login_ID) {
                 var name=$("#profile_first_name").val(); //get the value of first name typed into the input
                 $(".welcome").html("Welcome "+name);
               } else {
-                alert("Error");;
+                alert("Error");
               }
+
           },
           error: function(error) {
                 alert("Error");
+
               }
         }
       );
@@ -208,15 +214,16 @@ function checkemail() {
 
      var email=document.getElementById("username").value;
 
+     var checkUrl = '../../controller/checkdata.php?email=' + email;
+
      if(email)
      {
       $.ajax({
-      type: 'post',
-      url: '../../controller/checkdata.php',
+      type: 'get',
+      url: checkUrl,
       data: {
        user_name:email,
       },
-			// datatype: 'json',
       success: function (response) {
        $('#email_status').html(response);
 				 if(response=="")
@@ -228,9 +235,6 @@ function checkemail() {
 	        return false;
 	       }
 			 }
-			//  error: function(error) {
-	 	// 		$('#email_status').html(error);
-			 //  }
 		});
 	}
 	else
@@ -254,6 +258,8 @@ $(document).ready(function(){
     autoclose: true
   };
   date_input.datepicker(options);
+
+
 
 // Start and Finish time jQuery plugin
   $('#start').timepicker({
@@ -358,11 +364,47 @@ function completeUpload(success, fileName) {
 }
 
 
+
+
+function checkPet() {
+
+     var petID = $( "#pet_ad option:selected" ).val();
+
+     if(petID)
+     {
+        $.ajax({
+        type: 'post',
+        url: '../../controller/checkPet.php',
+        data: {
+         pet_ad:petID,
+        },
+  			// datatype: 'json',
+        success: function (response) {
+         $('#pet_status').html(response);
+  				 if(response=="")
+  	       {
+  	        return true;
+  	       }
+  	       else
+  	       {
+  	        return false;
+  	       }
+  			 }
+    	  });
+    	}
+    	else
+    	{
+    		$('#pet_status').html("");
+    		return false;
+    	}
+    }
+
+
+
 // AJAX post ad
 function addAd(login_ID) {
 
-
-var petID = $( "#pet_ad option:selected" ).val();
+    var petID = $( "#pet_ad option:selected" ).val();
 
     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
 
@@ -373,11 +415,24 @@ var petID = $( "#pet_ad option:selected" ).val();
           data: $('#ad_form').serialize(),
           datatype: 'json',
           success:function(result) {
+            console.log(result);
+            if(result.petAd == false){
+              alert("Pet ad already exists!");
+            }else{
               alert("Ad posted!");
               $('#image_table').hide();
+            }
+
+            // if(petID){
+            //   alert("Pet ad already exists!");
+            // }else{
+            //   alert("Ad posted!");
+            //   $('#image_table').hide();
+            // }
           },
           error: function(error) {
-              alert("Error");
+              alert(error);
+              console.log(error);
             }
         }
       );
@@ -479,5 +534,20 @@ $(document).ready(function(){
    });
   }
  });
+
+});
+
+// loading svg for ajax forms
+$(document).ready(function (){
+
+  var $loading = $('.loader').hide();
+  var $loading = $('.loader');
+
+  $(document).ajaxStart(function () {
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
 
 });

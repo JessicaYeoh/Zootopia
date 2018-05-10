@@ -100,12 +100,15 @@ $conn = connect();
 
             </div>
 
-<button class="btn btn-primary">Book Now</button>
+<div id="book_minfo">
+  <button class="btn btn-primary">Book Now</button>
 
 
-<a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
-  <button type="button" class="btn btn-primary"> More info </button>
-</a>
+  <a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
+    <button type="button" class="btn btn-primary"> More info </button>
+  </a>
+</div>
+
           </div>
       <?php
       }

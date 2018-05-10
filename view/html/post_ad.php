@@ -21,10 +21,23 @@ $stmt->bindParam(':lid', $login_ID, PDO::PARAM_INT);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($result['isCustomer'] == "YES" && ($result['isOwner'] == "" || $result['isOwner'] == NULL)){
+if($result['isCustomer'] == "YES" && ($result['isOwner'] == "" || $result['isOwner'] == NULL) && $_SESSION['login'] == true){
   // $_SESSION['message'] = '<script language="javascript"> alert("You must be a pet owner to post ads!") </script>';
-  header('location: loggedin_page.php?loginID='.$login_ID.'');
-}
+  include 'nav.php';
+
+  echo '<div id="post_ad_container">
+  <h1 id="ad_h1">Post your ad</h1>
+    <form id="ad_form">
+      <p>
+        Must be a pet owner to post an ad!
+      </p>
+
+      <span>If you have a pet to post please update your profile </span>
+      <a href="update_profile_page.php?loginID=';echo $_SESSION['loginID'];
+    echo '">here</a>
+    </form>
+  </div>';
+}else{
 
 include 'nav.php';
 ?>
@@ -34,21 +47,30 @@ include 'nav.php';
     <div id="post_ad_container">
         <h1 id="ad_h1">Post your ad</h1>
 
+        <?php
+        if (!isset($_SESSION['message'])){
+            $_SESSION['message'] = "";
+        }
+        echo $_SESSION['message'];
+        unset ($_SESSION['message']);
+        ?>
+
       <form id="ad_form">
+
 
           <div id="ad_form_section1">
 
                   <div class="form-group">
                     <label for="ad_title">Ad Title</label>
-                    <input type="text" class="form-control" id="ad_title" placeholder="e.g. German Sheperd puppy - 4 months old" name="ad_title" required>
+                    <input type="text" class="form-control stored" id="ad_title" placeholder="e.g. German Sheperd puppy - 4 months old" name="ad_title" required onkeyup="saveValue(this);">
                   </div>
 
                   <div class="form-group">
                     <label for="description">Describe what you're offering</label>
-                    <textarea class="form-control" id="description" rows="6" placeholder="e.g. Owner supervised visits, minimum 1hr bookings, play with my german sheperd puppy in my backyard" name="description" required></textarea>
+                    <textarea class="form-control stored" id="description" rows="6" placeholder="e.g. Owner supervised visits, minimum 1hr bookings, play with my german sheperd puppy in my backyard" name="description" required></textarea>
                   </div>
 
-                  <button class="btn btn-primary" onclick="showSection2();return false;"> Next </button>
+                  <button type="button" id="ad_section2" class="btn btn-primary"> Next </button>
 
           </div>
 
@@ -70,7 +92,7 @@ include 'nav.php';
                     $no_of_pets = $stmt->rowCount();
                     ?>
 
-                    <select id="pet_ad" class="form-control" name="pet_ad" required>
+                    <select id="pet_ad" class="form-control select stored" name="pet_ad" required onchange="checkPet();">
                         <?php
                         for($i=0;$i<$no_of_pets;$i++){
                         ?>
@@ -79,24 +101,22 @@ include 'nav.php';
                         }
                         ?>
                     </select>
+
+                    <div id="pet_status">
+
+                    </div>
                 </div>
 
-                <?php
-                if (!isset($_SESSION['message'])){
-                    $_SESSION['message'] = "";
-                }
-                echo $_SESSION['message'];
-                unset ($_SESSION['message']);
-                ?>
+
 
                 <div class="form-group">
                   <label for="location"> Location</label>
-                  <input type="text" class="form-control" placeholder="location" name="location" required/>
+                  <input type="text" id="location_ad" class="form-control stored" placeholder="location" name="location" required/>
                 </div>
 
                 <div class="form-group">
                   <label for="booking_type">What type of booking is allowed for your pet?</label>
-                  <select name="booking_type" class="form-control" required>
+                  <select name="booking_type" id="booking_type_ad" class="form-control select stored" required>
                     <option>Owner Supervised</option>
                     <option>Private</option>
                     <option>Owner Supervised OR Private</option>
@@ -105,32 +125,30 @@ include 'nav.php';
 
                 <div class="form-group">
                   <label for="price">Price</label>
-                  <input type="text" id="price" class="form-control" name="price" placeholder="$0.00" required/>
+                  <input type="text" id="price" class="form-control stored" name="price" placeholder="$0.00" required/>
                 </div>
 
                 <div class="form-group">
                   <div class="form-check">
                     <label class="form-check-label" for="optionsRadios">
-                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="Hourly" checked required>
+                      <input type="radio" class="form-check-input stored" name="optionsRadios" id="optionsRadios1" value="Hourly" checked required>
                       Hourly
                     </label>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label" for="optionsRadios">
-                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="Per Person" required>
+                      <input type="radio" class="form-check-input stored" name="optionsRadios" id="optionsRadios2" value="Per Person" required>
                       Per Person
                     </label>
                   </div>
                 </div>
 
-                  <button class="btn btn-primary" onclick="showSection1();return false;"> Back </button>
+                  <button type="button" id="back_section1" class="btn btn-primary"> Back </button>
 
-                  <button class="btn btn-primary" onclick="showSection3();return false;"> Next </button>
+                  <button type="button" id="ad_section3" class="btn btn-primary"> Next </button>
             </div>
 
             <div id="ad_form_section3">
-
-
 
                <div>
                  <label> Select pet pictures</label>
@@ -144,29 +162,51 @@ include 'nav.php';
                </div>
 
 
-
-                  <button class="btn btn-primary" onclick="showSection2();return false;"> Back </button>
+                  <button type="button" id="back_section2" class="btn btn-primary"> Back </button>
 
                   <input type="hidden" name="action_type" value="add"/>
 
-                  <input type="button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
+<input type="button" id="ad_button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
 
+
+<!-- <button type="submit">Post ad</button> -->
 
             </div>
 
     </form>
 
-
-
-
-
-
-
-
-
-
   </div>
 
+<?php
+}
+?>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-price-format/2.2.0/jquery.priceformat.min.js"></script>
+
+<script type="text/javascript">
+
+
+if(localStorage){
+  $(document).ready(function(){
+    $('.stored').phoenix({
+      webStorage: 'sessionStorage'
+    })
+    $('#ad_button').click(function(e){
+      $('.stored').phoenix('remove')
+      sessionStorage.removeItem('pet_ad');
+      sessionStorage.removeItem('booking_type_ad');
+    });
+
+    $('.select').change(function() {
+        sessionStorage.setItem(this.id, this.value);
+    }).val(function() {
+        return sessionStorage.getItem(this.id)
+    });
+  });
+} else{
+    alert("Sorry, your browser do not support local storage.");
+}
+
+</script>
 
 </body>

@@ -10,71 +10,108 @@ include 'header.php';
 include 'nav.php';
 
 $conn = connect();
-
-
-$login_ID = $_GET['loginID'];
-
-
 ?>
 
-<div id="pet_profile_page">
+<div id="ads_container">
 
-  <div id="ads_nav">
+  <div id="my_ads_nav">
     <?php include 'loggedin_nav.php';?>
   </div>
 
+    <h1 id="ads_h1">My ads</h1>
 
-    <h1 id="pet_profile_h1">My ads</h1>
+    <div id="ad_added_msg">
+      <p>
+        <?php
+        if(!isset($_SESSION['message'])){
+          $_SESSION['message'] = "";
+        }else{
+        echo $_SESSION['message'];
+        unset ($_SESSION['message']);
+        }
+        ?>
+      </p>
+    </div>
 
-    <div id="pet_profile_update_container">
-      <form id="pet_profile_update_form">
+  <div id="individual_ad">
+    <?php
+    // $login_ID = $_SESSION['loginID'];
+    $userID = $_SESSION['userID'];
 
-            <div class="form-group">
-                <label for="profile_avatar">Choose pet picture/s</label>
-                <input type="file" class="form-control-file" id="profile_avatar" aria-describedby="fileHelp" name="avatar">
+    // $allPets = getAllPets($userID);
+
+    $getAds = "SELECT * FROM tblad
+    INNER JOIN tbladimages ON tblad.adID = tbladimages.adID
+    INNER JOIN tblpet ON tblpet.petID = tblad.petID
+    INNER JOIN tbluser ON tbluser.userID = tblpet.userID
+    INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
+    WHERE tblpet.userID = '$userID';
+    ";
+    $stmt = $conn->prepare($getAds);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $total_ads = $stmt->rowCount();
+
+    for($i=0;$i<$total_ads;$i++){
+        $adTitle = $result[$i]['adTitle'];
+        // $descr = $result[$i]['adDescription'];
+        $loc = $result[$i]['location'];
+        $price = $result[$i]['petPrice'];
+        $priceType = $result[$i]['priceType'];
+        $bookType = $result[$i]['bookingType'];
+        $img = $result[$i]['image_name'];
+        $adID = $result[$i]['adID'];
+    ?>
+
+
+        <div id="show_ads">
+
+
+            <div id="image_preview">
+              <img id="previewing" src="../img/<?php
+              echo $img;?>" width="130px" height="130px"/>
             </div>
 
-            <div class="form-group">
-              <label for="pet_name">Pet Name</label>
-              <input type="text" class="form-control" id="pet_name" name="pet_name" value="<?php ?>" required>
+            <hr id="line">
+
+            <div id="ad_info">
+
+                  <p class="ad_info_label">Ad Title: </p>
+                  <p class="ad_info_value"> <?php echo $adTitle; ?> </p>
+
+                  <!-- <p class="ad_info_label"> Description: </p>
+                  <p class="ad_info_value"> <?php
+                  // echo $descr; ?> </p> -->
+
+                  <p class="ad_info_label"> Location: </p>
+                  <p class="ad_info_value"> <?php echo $loc; ?> </p>
+
+                  <p class="ad_info_label"> Price: </p>
+                  <p class="ad_info_value"> <?php echo $price; ?> </p>
+
+                  <p class="ad_info_label"> Price type: </p>
+                  <p class="ad_info_value"> <?php echo $priceType; ?> </p>
+
+                  <p class="ad_info_label"> Booking type: </p>
+                  <p class="ad_info_value"> <?php echo $bookType; ?> </p>
+
             </div>
 
-            <div class="form-group">
-              <label for="animal_type">Animal type</label>
-              <input type="text" class="form-control" id="animal_type" name="animal_type" value="<?php ?>" required>
-            </div>
-
-            <div class="form-group">
-              <label for="breed_type">Breed type</label>
-              <input id="breed_type" type="text" class="form-control" name="breed_type" value="<?php ?>">
-            </div>
-
-            <div class="form-group">
-              <label for="pet_age">Pet age</label>
-              <input id="pet_age" type="text" class="form-control" name="pet_age" value="<?php ?>" required>
-            </div>
-
-            <div class="form-group">
-              <label for="pet_size">Pet size</label>
-              <select class="" id="pet_size" name="pet_size" required value="<?php ?>">
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-              </select>
-            </div>
+<button class="btn btn-primary">Book Now</button>
 
 
-            <input type="button" value="Add" onclick="showMsg(<?php echo $login_ID;?>)"/>
-
-            <input type="button" value="Update" onclick="showMsg(<?php echo $login_ID;?>)"/>
-
-
-            <div id="message"></div>
-
-        </form>
-      </div>
+<a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
+  <button type="button" class="btn btn-primary"> More info </button>
+</a>
+          </div>
+      <?php
+      }
+      ?>
+    </div>
 
   </div>
 
+  </body>
 
-</body>
+</html>

@@ -186,13 +186,16 @@ header.masthead .bg-circle-4 {
 }
 
 #ad_form_section2,
-#ad_form_section3,
-#ad_form_section4{
+#ad_form_section3{
   display: none;
 }
 
 #post_ad_container h1{
   margin: 0 auto;
+}
+
+#pet_status{
+  color: red;
 }
 /*****************************END Post Ad Page****************************************/
 
@@ -244,6 +247,14 @@ header.masthead .bg-circle-4 {
 
 
 /*************************START LOGGED IN PROFILE UPDATE Page*****************************/
+.loader{
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
 
 #loggedin_page{
   display: grid;
@@ -253,21 +264,40 @@ header.masthead .bg-circle-4 {
   top: 100px;
   width: 80%;
   height: auto;
-  background-color: rgb(164, 216, 249);
 }
 
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-
+  background-color: rgba(218, 240, 241, 0.8);
   padding: 20px;
   font-size: 20px;
-}
-.item1 {
-  grid-column: 1 / span 3;
-  grid-row: 1;
-  text-align: center;
+  border-radius: 5px;
 }
 
+    .item1 {
+      grid-column: 1 / span 3;
+      grid-row: 1;
+      background-color: transparent;
+    }
+
+        #loggedinNav{
+          justify-content: center;
+        }
+
+        #loggedin_nav_container .bg-light{
+          background-color: transparent !important;
+        }
+
+        #loggedinNav .ml-auto{
+          margin-left: 0 !important;
+        }
+
+        #loggedinNav > ul > li > a{
+          color: rgb(23, 173, 164);
+        }
+
+        #loggedinNav > ul > li > a:hover{
+          color: rgb(110, 110, 110);
+        }
 
       .item2 {
         grid-column: 1;
@@ -318,13 +348,15 @@ header.masthead .bg-circle-4 {
 }
 
     .pet-grid-item{
-      width: 200px;
+      width: 95%;
       height: 250px;
       border: 2px solid rgb(182, 182, 182);
+      border-radius: 5px;
       cursor: pointer;
       display: grid;
       align-content: center;
       justify-content: center;
+      margin: 0 auto;
     }
 
     .pet-grid-item:hover{
@@ -339,6 +371,10 @@ header.masthead .bg-circle-4 {
     .show_pet2{
       grid-column: 1;
       grid-row: 2;
+    }
+
+    #pet_display > div > img{
+      border-radius: 15px;
     }
 
 
@@ -358,6 +394,85 @@ header.masthead .bg-circle-4 {
 
 #pet_display #show_pet{
   text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  #loggedin_page{
+    width: 100%;
+  }
+
+    .item1 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+      #loggedin_nav button{
+        margin: 0 auto;
+      }
+
+    .item2 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .item3 {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .item4 {
+      grid-column: 1;
+      grid-row: 4;
+      grid-template-columns: repeat(auto-fill, 100%);
+    }
+
+      .show_pet1{
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .show_pet2{
+        height: auto;
+        border: 0px;
+        padding-top: 5px;
+        padding-bottom: 10px;
+        justify-content: flex-start;
+      }
+
+      .show_pet3{
+        margin-bottom: 10px;
+      }
+
+
+  #profile_update_container,
+  #pet_profile_update_container,
+  #create_booking_container,
+  #pet_profile_update{
+    width: 90% !important;
+  }
+}
+
+@media only screen and (min-width: 426px) and (max-width: 768px) {
+    .item4 {
+      grid-template-columns: repeat(auto-fill, 50%);
+    }
+    .show_pet1{
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .show_pet2{
+      grid-row: 1;
+      grid-column: 2;
+      justify-content: flex-end;
+    }
+
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1100px) {
+    #loggedin_page{
+      width: 90%;
+    }
 }
 
       /*****PROFILE PICTURE********/
@@ -503,12 +618,22 @@ header.masthead .bg-circle-4 {
 
 /*******************************PET PROFILES PAGE***********************************/
 #pet_profiles_container,
-#ads_container,
-#single_ad{
+#ads_container{
   width: 100%;
   height: auto;
   position: relative;
   top: 100px;
+}
+
+#single_ad{
+  border: 1px solid blue;
+  margin: 0 auto;
+  padding: 20px;
+  width: 80%;
+  height: auto;
+  position: relative;
+  top: 100px;
+  margin-bottom: 100px; 
 }
 
 #pet_profiles,
@@ -520,12 +645,11 @@ header.masthead .bg-circle-4 {
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   margin-bottom: 50px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(auto-fill, 20em);
 }
 
 #pet_profiles_update_form,
 #show_ads{
-  width: 300px;
   height: auto;
   border: 1px solid blue;
   border-radius: 5px;

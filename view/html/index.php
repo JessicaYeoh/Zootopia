@@ -7,6 +7,7 @@ include 'nav.php';
     <header class="masthead text-center text-white">
       <div class="masthead-content">
         <div class="container">
+
           <h1 class="masthead-heading mb-0">Book a pet</h1>
           <h2 class="masthead-subheading mb-0">Zero responsibility, 100% fun</h2>
           <a href="view/html/browse_petads.php" class="btn btn-primary btn-xl rounded-pill mt-5">Book Now</a>
@@ -23,7 +24,7 @@ include 'nav.php';
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="view/img/Labrador.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="../img/Labrador.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">
@@ -41,7 +42,7 @@ include 'nav.php';
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="view/img/JapSpitz.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="../img/JapSpitz.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6">
@@ -59,7 +60,7 @@ include 'nav.php';
         <div class="row align-items-center">
           <div class="col-lg-6 order-lg-2">
             <div class="p-5">
-              <img class="img-fluid rounded-circle" src="view/img/horse.jpg" alt="">
+              <img class="img-fluid rounded-circle" src="../img/horse.jpg" alt="">
             </div>
           </div>
           <div class="col-lg-6 order-lg-1">

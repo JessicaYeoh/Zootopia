@@ -1,40 +1,63 @@
-<nav id="loggedin_nav">
-    <a href="loggedin_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Dashboard</button>
-    </a>
+<div id="loggedin_nav_container">
 
-    <a href="update_profile_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Account Details</button>
-    </a>
+<nav id="loggedin_nav" class="navbar navbar-expand-lg navbar-light bg-light">
 
-    <a href="pet_profile.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Your Pets</button>
-    </a>
 
-<?php
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#loggedinNav" aria-controls="loggedinNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-$getOneUser = "SELECT * FROM tbllogin
-INNER JOIN tbluser ON tbllogin.loginID = tbluser.loginID
-WHERE tbllogin.loginID = :lid;";
-$stmt = $conn->prepare($getOneUser);
-$stmt->bindParam(':lid', $_SESSION['loginID'], PDO::PARAM_INT);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+    <div class="collapse navbar-collapse" id="loggedinNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="loggedin_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+            Dashboard
+          </a>
+        </li>
 
-if($result['isOwner'] == "YES") {
-?>
-    <a href="create_booking.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Create Booking</button>
-    </a>
-<?php
-}
-?>
+<li class="nav-item">
+        <a class="nav-link" href="update_profile_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          Account Details
+        </a>
+    </li>
+<li class="nav-item">
+        <a class="nav-link" href="pet_profile.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          Your Pets
+        </a>
+    </li>
+    <?php
 
-    <a href="my_ads.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">My ads</button>
-    </a>
+    $getOneUser = "SELECT * FROM tbllogin
+    INNER JOIN tbluser ON tbllogin.loginID = tbluser.loginID
+    WHERE tbllogin.loginID = :lid;";
+    $stmt = $conn->prepare($getOneUser);
+    $stmt->bindParam(':lid', $_SESSION['loginID'], PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    <a href="payments.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Payments</button>
-    </a>
+    if($result['isOwner'] == "YES") {
+    ?>
+    <li class="nav-item">
+        <a class="nav-link" href="create_booking.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          Create Booking
+        </a>
+    </li>
+    <?php
+    }
+    ?>
+<li class="nav-item">
+        <a class="nav-link" href="my_ads.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          My ads
+        </a>
+</li>
+
+<li class="nav-item">
+        <a class="nav-link" href="payments.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          Payments
+        </a>
+</li>
+      </ul>
+    </div>
 </nav>
+
+</div>

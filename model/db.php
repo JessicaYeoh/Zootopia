@@ -72,8 +72,22 @@ function updateUser($postdata, $loginID) {
         $stmt->bindParam(':fname', test_user_input($postdata['fname']), PDO::PARAM_STR);
         $stmt->bindParam(':surname', test_user_input($postdata['lname']), PDO::PARAM_STR);
         $stmt->bindParam(':ph', test_user_input($postdata['phone']), PDO::PARAM_STR);
-        $stmt->bindParam(':owner', test_user_input($postdata['owner']), PDO::PARAM_STR);
-        $stmt->bindParam(':cust', test_user_input($postdata['customer']), PDO::PARAM_STR);
+
+        if(isset($postdata['owner'])){
+          $stmt->bindParam(':owner', test_user_input($postdata['owner']), PDO::PARAM_STR);
+        }else{
+          $empty = "";
+          $stmt->bindParam(':owner', $empty, PDO::PARAM_STR);
+        }
+
+
+        if(isset($postdata['customer'])){
+          $stmt->bindParam(':cust', test_user_input($postdata['customer']), PDO::PARAM_STR);
+        }else{
+          $empty = "";
+          $stmt->bindParam(':cust', $empty, PDO::PARAM_STR);
+        }
+
         $stmt->bindParam(':addr', test_user_input($postdata['address']), PDO::PARAM_STR);
         $stmt->bindParam(':sub', test_user_input($postdata['suburb']), PDO::PARAM_STR);
         $stmt->bindParam(':post', test_user_input($postdata['postcode']), PDO::PARAM_STR);

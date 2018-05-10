@@ -59,6 +59,7 @@ if($result['isOwner'] == "YES") {
     <div class="modal fade" id="add_pet_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
+
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Add Pet</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -79,27 +80,27 @@ if($result['isOwner'] == "YES") {
 
               <div class="form-group">
                 <label for="pet_name">Pet Name</label>
-                <input type="text" class="form-control" id="pet_name" name="pet_name" required>
+                <input type="text" class="form-control stored" id="pet_name" name="pet_name" required>
               </div>
 
               <div class="form-group">
                 <label for="animal_type">Animal type</label>
-                <input type="text" class="form-control" id="animal_type" name="animal_type" required>
+                <input type="text" class="form-control stored" id="animal_type" name="animal_type" required>
               </div>
 
               <div class="form-group">
                 <label for="breed_type">Breed type</label>
-                <input id="breed_type" type="text" class="form-control" name="breed_type">
+                <input id="breed_type" type="text" class="form-control stored" name="breed_type">
               </div>
 
               <div class="form-group">
                 <label for="pet_age">Pet age</label>
-                <input id="pet_age" type="text" class="form-control" name="pet_age" required>
+                <input id="pet_age" type="text" class="form-control stored" name="pet_age" required>
               </div>
 
               <div class="form-group">
                 <label for="pet_size">Pet size</label>
-                <select class="" id="pet_size" name="pet_size" required>
+                <select class="select" id="pet_size" name="pet_size" required>
                   <option>Small</option>
                   <option>Medium</option>
                   <option>Large</option>
@@ -114,7 +115,7 @@ if($result['isOwner'] == "YES") {
               </div> -->
 
               <div class="modal-footer">
-                  <input type="submit" class="btn btn-primary" value="Add" />
+                  <input type="submit" id="add_pet_button" class="btn btn-primary" value="Add" />
               </div>
 
             </form>
@@ -154,3 +155,25 @@ if($result['isOwner'] == "YES") {
 <?php
 }
 ?>
+
+<script type="text/javascript">
+    if(localStorage){
+      $(document).ready(function(){
+        $('.stored').phoenix({
+          webStorage: 'sessionStorage'
+        })
+        $('#add_pet_button').click(function(e){
+          $('.stored').phoenix('remove')
+          sessionStorage.removeItem('pet_size');
+        });
+
+        $('.select').change(function() {
+            sessionStorage.setItem(this.id, this.value);
+        }).val(function() {
+            return sessionStorage.getItem(this.id)
+        });
+      });
+    } else{
+        alert("Sorry, your browser do not support local storage.");
+    }
+</script>
