@@ -4,33 +4,39 @@
 <!-- Select pets from DB to display pet profile cards on logged in page -->
     <?php
     $userID = $_SESSION['userID'];
+    $result = show_2pets($userID);
 
-    // $allPets = getAllPets($userID);
-
-    $getPets = "SELECT * FROM tblpet INNER JOIN tblimagespet ON tblpet.petID = tblimagespet.petID WHERE userID = :uid LIMIT 2;";
-    $stmt = $conn->prepare($getPets);
-    $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $total_no_pets = $stmt->rowCount();
-
-    for($i=0;$i<$total_no_pets;$i++){
-        $petID = $result[$i]['petID'];
+    foreach($result as $row){
+        $petID = $row['petID'];
+        $img = $row['imageURL'];
     ?>
 
     <div id="pet_display" class="pet-grid-item show_pet3">
-        <div>
-          <img src="<?php echo $result[$i]['imageURL'];?>" width="130px" height="130px"/>
-        </div>
 
-        <h4><?php echo $result[$i]['petName'];?></h4>
+        <?php
+        if($row['inactive'] == 0) {
+        ?>
+          <div id="pet_<?php echo $petID;?>">
+              <div>
+              <?php if(isset($img) && ($img == "../img/")){ ?>
+                  <img src="<?php echo $img;?>no_photo.jpg" width="130px" height="130px"/>
+              <?php }else{?>
+                  <img src="<?php echo $img;?>" width="130px" height="130px"/>
+              <?php }?>
+              </div>
 
-        <h5><?php echo $result[$i]['petAge'];?> years old</h5>
+              <h4><?php echo $row['petName'];?></h4>
 
-         <a id="show_pet" href="petProfile.php?petID=<?php echo $petID;?>&#38;loginID=<?php echo $login_ID; ?>">
-           <button type="button" class="btn btn-primary"> Pet profile </button>
-         </a>
+              <h5><?php echo $row['petAge'];?> years old</h5>
+
+               <a id="show_pet" href="petProfile.php?petID=<?php echo $petID;?>&#38;loginID=<?php echo $login_ID; ?>">
+                 <button type="button" class="btn btn-primary"> Pet profile </button>
+               </a>
+          </div>
+
+        <?php
+        }
+        ?>
     </div>
 
 <?php
@@ -43,16 +49,9 @@
     <button type="button" id="add_pet" class="btn btn-primary" data-toggle="modal" data-target="#add_pet_modal">Add Pet</button>
 </div>
 
-
-
 <?php
-$getOneUser = "SELECT * FROM tbllogin
-INNER JOIN tbluser ON tbllogin.loginID = tbluser.loginID
-WHERE tbllogin.loginID = :lid;";
-$stmt = $conn->prepare($getOneUser);
-$stmt->bindParam(':lid', $_SESSION['loginID'], PDO::PARAM_INT);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$loginID = $_SESSION['loginID'];
+$result = getOneUser($loginID);
 
 if($result['isOwner'] == "YES") {
 ?>

@@ -4,6 +4,8 @@ session_start();
 include('../model/db.php');
 $conn = connect();
 
+echo $_FILES["multiple_files"];
+
 if(count($_FILES["file"]["name"]) > 0)
 {
  //$output = '';
@@ -22,16 +24,7 @@ if(count($_FILES["file"]["name"]) > 0)
   $location = '../view/img/' . $file_name;
   if(move_uploaded_file($tmp_name, $location))
   {
-
-// $userID = $_SESSION['userID'];
-$petID = $_GET['petID'];
-
-//     $query = "SELECT * FROM tblpet WHERE petID = '$petID';";
-//     $statement = $conn->prepare($query);
-//     $statement->execute();
-//     $result = $statement->fetch(PDO::FETCH_ASSOC);
-//
-// $pet_ID = $result['petID'];
+   $petID = $_GET['petID'];
 
    $query = "
    INSERT INTO tbladimages (image_name, adID)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2018 at 02:08 PM
+-- Generation Time: May 29, 2018 at 10:37 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -44,7 +44,8 @@ CREATE TABLE `tblad` (
 --
 
 INSERT INTO `tblad` (`adID`, `adTitle`, `adDescription`, `location`, `petPrice`, `priceType`, `bookingType`, `postAdDT`, `updateAdDT`, `petID`) VALUES
-(36, 'Japanese Spitz - very playful!', 'Looking for people who are interested in playing with my dog at my home. \r\n\r\nWeekends are the best time to meet but contact me for further info.\r\n\r\nMinimum 1 hour bookings', 'Brisbane', '$10.00', 'Hourly', 'Owner Supervised', '2018-04-29 16:40:03', '2018-04-29 16:40:03', 40);
+(2, 'jkbh', 'kjlkj', 'test', '$2.34', 'Per Person', 'Private', '2018-05-28 11:00:02', '2018-05-28 11:00:02', 62),
+(5, 'asdf', 'sdaasd', 'sdsad', '$9.90', 'Per Person', 'Owner Supervised', '2018-05-28 14:46:51', '2018-05-28 14:46:51', 61);
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,10 @@ CREATE TABLE `tbladdress` (
 --
 
 INSERT INTO `tbladdress` (`addressID`, `address`, `suburb`, `postcode`, `state`, `createDT`, `updateDT`, `userID`) VALUES
-(8, '', '', '000', 'NSW', '2018-04-13 22:59:01', '2018-05-09 15:38:09', 8),
-(9, '', '', '', 'ACT', '2018-04-16 16:11:48', '2018-05-09 16:35:37', 9);
+(8, '', 'Brisbane', '4006', 'QLD', '2018-04-13 22:59:01', '2018-05-28 13:43:45', 8),
+(9, '', 'South Bank', '4001', 'ACT', '2018-04-16 16:11:48', '2018-05-25 22:26:12', 9),
+(39, NULL, '', '', '', '2018-05-16 17:08:43', '2018-05-16 17:08:43', 39),
+(40, NULL, '', '', '', '2018-05-23 00:14:26', '2018-05-23 00:14:26', 40);
 
 -- --------------------------------------------------------
 
@@ -90,6 +93,20 @@ CREATE TABLE `tblbookings` (
   `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tblbookings`
+--
+
+INSERT INTO `tblbookings` (`bookingsID`, `dateBooked`, `startTimeBooked`, `finishTimeBooked`, `priceBooked`, `priceType`, `petBooked`, `isCompleted`, `petID`, `userID`) VALUES
+(41, '', '', '', '', 'Hourly', 'Max', '', 60, 8),
+(50, '08/05/2018', '08:00 AM', '', '', 'Hourly', 'Max', '', 60, 8),
+(51, '31/05/2018', '08:00 AM', '09:00 AM', '$98.76', 'Hourly', 'Max', '', 60, 8),
+(52, '24/05/2018', '07:30 AM', '08:00 AM', '$343.45', 'Hourly', 'Angel', '', 40, 8),
+(53, '29/05/2018', '08:30 AM', '08:30 AM', '$3.33', 'Hourly', 'Angel', '', 40, 8),
+(54, '30/05/2018', '08:00 AM', '09:00 AM', '$12.00', 'Per Person', 'Max', '', 60, 8),
+(55, '29/05/2018', '08:30 AM', '09:00 AM', '$3.33', 'Per person', 'Star', '', 61, 8),
+(56, '06/06/2018', '09:00 AM', '09:30 AM', '$8.88', 'Per person', 'Sam', '', 62, 8);
+
 -- --------------------------------------------------------
 
 --
@@ -107,10 +124,11 @@ CREATE TABLE `tblimagespet` (
 --
 
 INSERT INTO `tblimagespet` (`imagesID`, `imageURL`, `petID`) VALUES
-(12, '../img/jap_spitz.jpg', 40),
-(13, '../img/lab.jpg', 41),
-(14, '../img/border_collie.jpg', 42),
-(16, '../img/horse.jpg', 44);
+(12, '../img/border_collie.jpg', 40),
+(22, '../img/jap_spitz.jpg', 60),
+(23, '../img/horse.jpg', 61),
+(24, '../img/lab.jpg', 62),
+(25, '../img/test_bookcover.jpg', 63);
 
 -- --------------------------------------------------------
 
@@ -129,7 +147,9 @@ CREATE TABLE `tblimagesuser` (
 --
 
 INSERT INTO `tblimagesuser` (`imagesUserID`, `imageURL`, `userID`) VALUES
-(4, '../img/FB_IMG_1512221348275.jpg', 8);
+(4, '../img/FB_IMG_1512221348275.jpg', 8),
+(31, '', 39),
+(32, '', 40);
 
 -- --------------------------------------------------------
 
@@ -152,8 +172,10 @@ CREATE TABLE `tbllogin` (
 --
 
 INSERT INTO `tbllogin` (`loginID`, `firstName`, `lastName`, `loginUsername`, `loginPassword`, `createDT`, `updateDT`) VALUES
-(8, 'Jessica', 'Yeoh', 'jessica.yeoh@outlook.com', '$2y$10$FokuctNjzCxvEyyWTZzmSOGDdFGJenlMrQxsc9OBxtyhVJXYVsIrC', '2018-04-13 22:59:01', '2018-05-09 15:38:09'),
-(9, 'test', 'test', 'test@email.com', '$2y$10$51qrvgArWLgF8bvZIVdJj.HxHlHwutnzv.BpThkViF6ZoVWdbSvhu', '2018-04-16 16:11:48', '2018-05-09 16:35:37');
+(8, 'Jessica', 'Yeoh', 'jessica.yeoh@outlook.com', '$2y$10$FokuctNjzCxvEyyWTZzmSOGDdFGJenlMrQxsc9OBxtyhVJXYVsIrC', '2018-04-13 22:59:01', '2018-05-28 13:43:45'),
+(9, 'Anne', 'Smith', 'test@email.com', '$2y$10$51qrvgArWLgF8bvZIVdJj.HxHlHwutnzv.BpThkViF6ZoVWdbSvhu', '2018-04-16 16:11:48', '2018-05-25 22:26:12'),
+(38, 'test2', 'test2', 'test2@email.com', '$2y$10$w/7M96WL5Wvq04ikqB4VLuBqoL1J3ia7i4VtNDMY2J5mJjVKmQQYC', '2018-05-16 17:08:43', '2018-05-16 17:08:43'),
+(39, 'test3', 'test3', 'test3@email.com', '$2y$10$3xLP4dNDcnZFuIn.d7TrG.ABOezRIAenHWOXILalGbjazTRAEsCPK', '2018-05-23 00:14:26', '2018-05-23 00:14:26');
 
 -- --------------------------------------------------------
 
@@ -171,6 +193,7 @@ CREATE TABLE `tblpet` (
   `petSize` varchar(50) NOT NULL,
   `createPetDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatePetDT` datetime NOT NULL,
+  `inactive` int(10) UNSIGNED NOT NULL,
   `userID` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -178,11 +201,13 @@ CREATE TABLE `tblpet` (
 -- Dumping data for table `tblpet`
 --
 
-INSERT INTO `tblpet` (`petID`, `petName`, `petNickname`, `petAnimal`, `petBreed`, `petAge`, `petSize`, `createPetDT`, `updatePetDT`, `userID`) VALUES
-(40, 'Angel', NULL, 'Dog', 'Japanese Spitz', '1', 'Small', '2018-04-29 16:35:40', '2018-05-09 13:19:58', 8),
-(41, 'Bob', NULL, 'Dog', 'Labrador', '3', 'Large', '2018-04-29 16:36:40', '2018-04-29 16:36:40', 8),
-(42, 'Max', NULL, 'Dog', 'German Shepard', '2', 'Large', '2018-04-29 16:38:40', '2018-04-29 16:38:40', 8),
-(44, 'Stealth', NULL, 'Horse', '', '4', 'Large', '2018-05-09 16:44:29', '2018-05-09 16:44:29', 9);
+INSERT INTO `tblpet` (`petID`, `petName`, `petNickname`, `petAnimal`, `petBreed`, `petAge`, `petSize`, `createPetDT`, `updatePetDT`, `inactive`, `userID`) VALUES
+(40, 'Angel', NULL, 'Dog', 'Japanese Spitz', '1', 'Small', '2018-04-29 16:35:40', '2018-05-09 13:19:58', 0, 8),
+(44, 'Stealth', NULL, 'Horse', '', '4', 'Large', '2018-05-09 16:44:29', '2018-05-09 16:44:29', 0, 9),
+(60, 'Max', NULL, 'German Sheperd', 'Dog', '3', 'Large', '2018-05-14 21:31:32', '2018-05-25 22:39:15', 1, 8),
+(61, 'Star', NULL, 'Horse', '', '6', 'Large', '2018-05-24 16:35:25', '2018-05-24 16:35:25', 0, 8),
+(62, 'Sam', NULL, 'Dog', 'Labrador', '3', 'Medium', '2018-05-24 16:36:24', '2018-05-24 16:36:24', 0, 8),
+(63, 'Test', NULL, 'Test', 'Test', '8', 'Medium', '2018-05-24 16:43:02', '2018-05-24 16:43:02', 0, 8);
 
 -- --------------------------------------------------------
 
@@ -207,6 +232,7 @@ CREATE TABLE `tblreviews` (
 CREATE TABLE `tbluser` (
   `userID` int(10) UNSIGNED NOT NULL,
   `phone` varchar(10) NOT NULL,
+  `isAdmin` varchar(10) DEFAULT NULL,
   `isOwner` varchar(10) DEFAULT NULL,
   `isCustomer` varchar(10) DEFAULT NULL,
   `createDT` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -218,9 +244,11 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`userID`, `phone`, `isOwner`, `isCustomer`, `createDT`, `updateDT`, `loginID`) VALUES
-(8, '', 'YES', 'YES', '2018-04-13 22:59:01', '2018-05-09 15:38:09', 8),
-(9, '', 'YES', 'YES', '2018-04-16 16:11:48', '2018-05-09 16:35:37', 9);
+INSERT INTO `tbluser` (`userID`, `phone`, `isAdmin`, `isOwner`, `isCustomer`, `createDT`, `updateDT`, `loginID`) VALUES
+(8, '', 'YES', 'YES', 'YES', '2018-04-13 22:59:01', '2018-05-28 13:43:45', 8),
+(9, '', '', 'YES', 'YES', '2018-04-16 16:11:48', '2018-05-25 22:26:12', 9),
+(39, '', NULL, '', 'YES', '2018-05-16 17:08:43', '2018-05-16 17:08:43', 38),
+(40, '', NULL, '', 'YES', '2018-05-23 00:14:26', '2018-05-23 00:14:26', 39);
 
 --
 -- Indexes for dumped tables
@@ -299,43 +327,43 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tblad`
 --
 ALTER TABLE `tblad`
-  MODIFY `adID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `adID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbladdress`
 --
 ALTER TABLE `tbladdress`
-  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `addressID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tblbookings`
 --
 ALTER TABLE `tblbookings`
-  MODIFY `bookingsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `bookingsID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tblimagespet`
 --
 ALTER TABLE `tblimagespet`
-  MODIFY `imagesID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `imagesID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tblimagesuser`
 --
 ALTER TABLE `tblimagesuser`
-  MODIFY `imagesUserID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `imagesUserID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tbllogin`
 --
 ALTER TABLE `tbllogin`
-  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `loginID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tblpet`
 --
 ALTER TABLE `tblpet`
-  MODIFY `petID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `petID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `tblreviews`
@@ -347,7 +375,7 @@ ALTER TABLE `tblreviews`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Constraints for dumped tables

@@ -4,19 +4,12 @@
 
 
 <?php
-
-$userID = $_SESSION['userID'];
-
-//Get user data from database
-$stmt = $conn->prepare("SELECT * FROM tblimagesuser WHERE userID = '$userID';");
-$stmt->execute();
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
 //User profile picture
+$userID = $_SESSION['userID'];
+$row = userImg($userID);
+
 $userPicture = !empty($row['imageURL'])?$row['imageURL']:'../img/no-image-available.png';
 $userPictureURL = $userPicture;
-
 ?>
 
       <div class="user-box">
@@ -27,7 +20,7 @@ $userPictureURL = $userPicture;
               </div>
               <!-- Hidden upload form -->
               <form method="post" action="../../controller/upload_userimg.php" enctype="multipart/form-data" id="picUploadForm" target="uploadTarget">
-              <input type="file" name="picture" id="fileInput"  style="display:none"/>
+                  <input type="file" name="picture" id="fileInput"  style="display:none"/>
               </form>
 
               <iframe id="uploadTarget" name="uploadTarget" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
@@ -42,13 +35,17 @@ $userPictureURL = $userPicture;
       </div>
 </div>
 
+<?php
+$loginID = $_SESSION['loginID'];
+$result = getOneUser($loginID);
+?>
 
 <p class="profile-grid-item prof3">
-  Name: <?php echo $_SESSION['firstname'];?>
+  Name: <?php echo $result['firstName'];?>
 </p>
 
 <div class="profile-grid-item prof4">
-    <a href="update_profile_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-      <button class="btn btn-primary">Edit Profile</button>
+    <a href="update_profile_page.php?loginID=<?php echo $loginID; ?>">
+        <button class="btn btn-primary">Edit Profile</button>
     </a>
 </div>

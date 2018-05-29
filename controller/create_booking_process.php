@@ -33,11 +33,11 @@ $conn = connect();
               $stmt->execute();
 
 
-              if($stmt->rowCount() < 0) {
-                echo 'failed to add';
-              } else {
-                echo 'booking added';
-            }
+            //   if($stmt->rowCount() < 0) {
+            //     echo 'failed to add';
+            //   } else {
+            //     echo 'booking added';
+            // }
         }
     	}
     		catch(PDOException $e)

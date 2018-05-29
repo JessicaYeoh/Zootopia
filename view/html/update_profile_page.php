@@ -42,16 +42,16 @@ $cust = $updateProfile['isCustomer'];
   <h1 id="profile_h1">Account Details</h1>
 
   <div id="profile_update_container">
-    <form id="profile_update_form">
+    <form id="profile_update_form" method="post">
 
           <div class="form-group">
             <label for="profile_first_name">First Name</label>
-            <input type="text" class="form-control stored" id="profile_first_name" name="fname" value="<?php echo $firstName; ?>" required>
+            <input type="text" class="form-control stored" id="profile_first_name" name="fname" value="<?php echo $firstName; ?>">
           </div>
 
           <div class="form-group">
             <label for="profile_last_name">Last Name</label>
-            <input type="text" class="form-control stored" id="profile_last_name" name="lname" value="<?php echo $surname; ?>" required>
+            <input type="text" class="form-control stored" id="profile_last_name" name="lname" value="<?php echo $surname; ?>">
           </div>
 
           <div class="form-group">
@@ -61,25 +61,26 @@ $cust = $updateProfile['isCustomer'];
 
           <div class="form-group">
             <label for="suburb">Suburb</label>
-            <input id="suburb" type="text" class="form-control stored" name="suburb" value="<?php echo $suburb; ?>" required>
+            <input id="suburb" type="text" class="form-control stored" name="suburb" value="<?php echo $suburb; ?>">
           </div>
 
           <div class="form-group">
             <label for="postcode">Postcode</label>
-            <input id="postcode" type="text" class="form-control stored" name="postcode" required value="<?php echo $postcode; ?>">
+            <input id="postcode" type="text" class="form-control stored" name="postcode" value="<?php echo $postcode; ?>">
           </div>
 
           <div class="form-group">
             <label for="state">State</label>
-            <select id="state_select" class="select2" name="state" required>
-              <option value="ACT" <?php if($state=="ACT") echo "selected"; ?>>ACT</option>
-              <option value="NSW" <?php if($state=="NSW") echo "selected"; ?>>NSW</option>
-              <option value="NT" <?php if($state=="NT") echo "selected"; ?>>NT</option>
-              <option value="QLD" <?php if($state=="QLD") echo "selected"; ?>>QLD</option>
-              <option value="TAS" <?php if($state=="TAS") echo "selected"; ?>>TAS</option>
-              <option value="VIC" <?php if($state=="VIC") echo "selected"; ?>>VIC</option>
-              <option value="WA" <?php if($state=="WA") echo "selected"; ?>>WA</option>
-            </select>
+
+            <?php
+            $options = array('ACT','NSW','NT','QLD','TAS','VIC','WA');
+            echo '<select id="state_select" class="select2" name="state">';
+                foreach($options as $selection){
+                    $selected=($state == $selection)? "selected" : "";
+                    echo '<option '.$selected.' value="'.$selection.'">'.$selection.'</option>';
+                }
+            echo '</select>';
+            ?>
           </div>
 
           <div class="form-group">
@@ -100,18 +101,18 @@ $cust = $updateProfile['isCustomer'];
           <label> On Zootopia I want to:</label>
           <div class="form-check">
             <label class="form-check-label" for="customer">
-              <input id="customer" class="form-check-input stored" type="checkbox" value="YES" name="customer" <?php if($cust=="YES") echo "checked"; ?>>
+              <input id="customer" class="form-check-input stored preventUncheck" type="checkbox" value="YES" name="customer" <?php if($cust=="YES") echo "checked"; ?>>
               Visit pets (make bookings)
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label" for="owner">
-              <input id="owner" class="form-check-input stored" type="checkbox" value="YES" name="owner" <?php if($owner=="YES") echo "checked"; ?>>
+              <input id="owner" class="form-check-input stored preventUncheck" type="checkbox" value="YES" name="owner" <?php if($owner=="YES") echo "checked"; ?>>
               Earn money (post pet ads)
             </label>
           </div>
 
-          <input type="button" id="profile_button" value="Update" onclick="showMsg(<?php echo $login_ID;?>)"/>
+          <input type="submit" id="profile_button" value="Update"/>
 
 
           <div id="message"></div>
@@ -121,6 +122,7 @@ $cust = $updateProfile['isCustomer'];
 
 </div>
 
+<?php include "footer.php";?>
 
 <script>
 
@@ -136,6 +138,12 @@ $cust = $updateProfile['isCustomer'];
     } else{
         alert("Sorry, your browser do not support local storage.");
     }
+
+// prevents user from unchecking both checkboxes (atleast 1 checkbox must be checked at any time)
+    $('.preventUncheck').on('change', function(e) {
+    if ($('.preventUncheck:checked').length == 0 && !this.checked)
+    	this.checked = true;
+    });
 </script>
 
 </body>

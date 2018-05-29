@@ -1,9 +1,9 @@
 <!-- Navigation -->
 
 <?php
-$PHP_SELF=$_SERVER['PHP_SELF'];
-
-$RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos($PHP_SELF,''));
+// $PHP_SELF=$_SERVER['PHP_SELF'];
+//
+// $RootDir='http://'.$_SERVER['HTTP_HOST'].'/zootopia'.substr($PHP_SELF,0,strrpos($PHP_SELF,''));
 
 
 echo '<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">

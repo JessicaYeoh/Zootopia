@@ -6,7 +6,7 @@
 
 
 <?php
-if(isset($_SESSION['login'])){
+// if(isset($_SESSION['login'])){
 ?>
 <p class="sessionID">
   <?php
@@ -15,7 +15,7 @@ if(isset($_SESSION['login'])){
 </p>
 
 <?php
-}
+// }
 ?>
 
   <!-- /.container -->

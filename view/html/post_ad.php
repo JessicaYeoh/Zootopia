@@ -1,18 +1,14 @@
 <?php
 session_start();
-
 if(!$_SESSION['login']){
   header("location:login_page.php");
 }
 
 include '../../model/db.php';
 include 'header.php';
-
 $conn = connect();
 
 $login_ID = $_GET['loginID'];
-
-
 $getOneUser = "SELECT * FROM tbllogin
 INNER JOIN tbluser ON tbllogin.loginID = tbluser.loginID
 WHERE tbllogin.loginID = :lid;";
@@ -24,21 +20,18 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if($result['isCustomer'] == "YES" && ($result['isOwner'] == "" || $result['isOwner'] == NULL) && $_SESSION['login'] == true){
   // $_SESSION['message'] = '<script language="javascript"> alert("You must be a pet owner to post ads!") </script>';
   include 'nav.php';
-
   echo '<div id="post_ad_container">
   <h1 id="ad_h1">Post your ad</h1>
     <form id="ad_form">
       <p>
         Must be a pet owner to post an ad!
       </p>
-
       <span>If you have a pet to post please update your profile </span>
       <a href="update_profile_page.php?loginID=';echo $_SESSION['loginID'];
     echo '">here</a>
     </form>
   </div>';
 }else{
-
 include 'nav.php';
 ?>
 
@@ -58,7 +51,7 @@ include 'nav.php';
       <form id="ad_form">
 
 
-          <div id="ad_form_section1">
+          <!-- <div id="ad_form_section1"> -->
 
                   <div class="form-group">
                     <label for="ad_title">Ad Title</label>
@@ -70,25 +63,22 @@ include 'nav.php';
                     <textarea class="form-control stored" id="description" rows="6" placeholder="e.g. Owner supervised visits, minimum 1hr bookings, play with my german sheperd puppy in my backyard" name="description" required></textarea>
                   </div>
 
-                  <button type="button" id="ad_section2" class="btn btn-primary"> Next </button>
+                  <!-- <button type="button" id="ad_section2" class="btn btn-primary"> Next </button> -->
 
-          </div>
+          <!-- </div> -->
 
-          <div id="ad_form_section2">
+          <!-- <div id="ad_form_section2"> -->
 
                 <div class="form-group">
                     <label for="pet_ad">Pet</label>
 
                     <?php
-
                     $userID = $_SESSION['userID'];
-
                     $showPet = "SELECT * FROM tblpet WHERE userID = :uid;";
                     $stmt = $conn->prepare($showPet);
                     $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
                     $stmt->execute();
                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
                     $no_of_pets = $stmt->rowCount();
                     ?>
 
@@ -143,12 +133,12 @@ include 'nav.php';
                   </div>
                 </div>
 
-                  <button type="button" id="back_section1" class="btn btn-primary"> Back </button>
+                  <!-- <button type="button" id="back_section1" class="btn btn-primary"> Back </button>
 
-                  <button type="button" id="ad_section3" class="btn btn-primary"> Next </button>
-            </div>
+                  <button type="button" id="ad_section3" class="btn btn-primary"> Next </button> -->
+            <!-- </div> -->
 
-            <div id="ad_form_section3">
+            <!-- <div id="ad_form_section3"> -->
 
                <div>
                  <label> Select pet pictures</label>
@@ -162,13 +152,13 @@ include 'nav.php';
                </div>
 
 
-                  <button type="button" id="back_section2" class="btn btn-primary"> Back </button>
+                  <!-- <button type="button" id="back_section2" class="btn btn-primary"> Back </button> -->
 
                   <input type="hidden" name="action_type" value="add"/>
 
-                  <input type="button" id="ad_button" class="btn btn-primary" value="Post ad" onclick="addAd(<?php echo $login_ID;?>)"/>
+                  <input type="submit" id="ad_button" class="btn btn-primary" value="Post ad"/>
 
-            </div>
+            <!-- </div> -->
 
     </form>
 
@@ -182,8 +172,6 @@ include 'nav.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-price-format/2.2.0/jquery.priceformat.min.js"></script>
 
 <script type="text/javascript">
-
-
 if(localStorage){
   $(document).ready(function(){
     $('.stored').phoenix()
@@ -192,7 +180,6 @@ if(localStorage){
       sessionStorage.removeItem('pet_ad');
       sessionStorage.removeItem('booking_type_ad');
     });
-
     $('.select').change(function() {
         sessionStorage.setItem(this.id, this.value);
     }).val(function() {
@@ -202,7 +189,6 @@ if(localStorage){
 } else{
     alert("Sorry, your browser do not support local storage.");
 }
-
 </script>
 
 </body>

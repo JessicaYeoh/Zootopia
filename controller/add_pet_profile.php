@@ -41,11 +41,13 @@ $conn = connect();
 
               $petID = $conn->lastinsertid();
 
+
               $insert_img =
                  "INSERT INTO tblimagespet (imageURL, petID) VALUES ('$targetPath', '$petID');";
 
               $stmt = $conn->prepare($insert_img);
               $stmt->execute();
+
 
 // fix rule to add more than one pet
               if($stmt->rowCount() < 1) {

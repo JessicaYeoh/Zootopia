@@ -38,37 +38,37 @@ $img = $petProf['imageURL'];
 
   <div id="pet_profile_update">
 
-<form enctype="multipart/form-data" method="POST" action="../../controller/update_pet_img.php?petID=<?php echo $pet_ID;?>&#38;loginID=<?php echo $login_ID; ?>">
+      <form enctype="multipart/form-data" method="POST" action="../../controller/update_pet_img.php?petID=<?php echo $pet_ID;?>&#38;loginID=<?php echo $login_ID; ?>">
 
-  <?php
-  if(isset($img) && ($img == "../img/")) {
-  ?>
-        <div id="image_preview">
-          <img id="previewing" src="<?php echo $img;?>no_photo.jpg" width="130px" height="130px"/>
-        </div>
-  <?php
-  }else {
-  ?>
-        <div id="image_preview">
-          <img id="previewing" src="<?php echo $img;?>" width="130px" height="130px"/>
-        </div>
-  <?php
-  }
-  ?>
+          <?php
+          if(isset($img) && ($img == "../img/")) {
+          ?>
+                <div id="image_preview">
+                  <img id="previewing" src="<?php echo $img;?>no_photo.jpg" width="130px" height="130px"/>
+                </div>
+          <?php
+          }else {
+          ?>
+                <div id="image_preview">
+                  <img id="previewing" src="<?php echo $img;?>" width="130px" height="130px"/>
+                </div>
+          <?php
+          }
+          ?>
 
-  <hr id="line">
+          <hr id="line">
 
-  <div class="form-group">
-    <label for="file">Select pet profile picture</label>
-    <input class="file-upload" type="file" name="file" id="file"/>
-    <input type="hidden" name="image_id" id="image_id" value="2" class="submit" />
-  </div>
+          <div class="form-group">
+            <label for="file">Select pet profile picture</label>
+            <input class="file-upload" type="file" name="file" id="file"/>
+            <input type="hidden" name="image_id" id="image_id" value="2" class="submit" />
+          </div>
 
-  <input type="hidden" name="action_type" value="add"/>
+          <input type="hidden" name="action_type" value="add"/>
 
-  <button type="submit"> Save</button>
+          <button type="submit"> Save</button>
 
-</form>
+      </form>
 
       <form id="pet_profile_update_form" method="POST">
 

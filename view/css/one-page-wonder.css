@@ -185,10 +185,10 @@ header.masthead .bg-circle-4 {
     width: 100%;
 }
 
-#ad_form_section2,
+/*#ad_form_section2,
 #ad_form_section3{
   display: none;
-}
+}*/
 
 #post_ad_container h1{
   margin: 0 auto;
@@ -577,13 +577,6 @@ header.masthead .bg-circle-4 {
   text-align: center;
 }
 
-.welcome{
-  text-align: right;
-  padding-right: 40px;
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
 #booking_nav nav,
 #pet_profile_nav nav,
 #profile_nav nav,
@@ -605,6 +598,12 @@ header.masthead .bg-circle-4 {
 .create-booking{
   padding-right: 1em;
 }
+
+label.error{
+  width: 100%;
+  display: block;
+}
+
 /*************************FINISH LOGGED IN PROFILE UPDATE Page*****************************/
 
 /*******************************BROWSE ADS PAGE**********************************/
@@ -633,7 +632,7 @@ header.masthead .bg-circle-4 {
   height: auto;
   position: relative;
   top: 100px;
-  margin-bottom: 100px; 
+  margin-bottom: 100px;
 }
 
 #pet_profiles,
@@ -648,7 +647,6 @@ header.masthead .bg-circle-4 {
   grid-template-columns: repeat(auto-fill, 20em);
 }
 
-#pet_profiles_update_form,
 #show_ads{
   height: auto;
   border: 1px solid blue;
@@ -656,8 +654,17 @@ header.masthead .bg-circle-4 {
   padding: 15px;
 }
 
-#pet_info, #ad_info{
+.pet_prof_container{
+  border: 1px solid blue;
+  height: auto;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+#pet_info,
+#ad_info{
   display: grid;
+  min-height: 180px;
 }
 
       .pet_info_label,
@@ -675,9 +682,18 @@ header.masthead .bg-circle-4 {
         margin: 0;
       }
 
+#ads_h1{
+  text-align: center;
+  margin-top: 50px;
+}
 
-
-
+#ad_buttons{
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
 
 #image_preview{
   text-align: center;
@@ -688,7 +704,80 @@ header.masthead .bg-circle-4 {
   text-align: center;
 }
 
+#pet_added_msg{
+  /*border: 1px solid blue;*/
+  text-align: center;
+  width: 200px;
+  margin: 50px auto;
+  height: 50px;
+  padding-top: 8px;
+  /*border-radius: 5px;*/
+  font-size: 20px;
+  font-weight: bold;
+}
 /*******************************END PET PROFILES PAGE***********************************/
+
+
+/*******************************ADMIN PAGE***********************************/
+#admin_nav{
+  position: relative;
+  top: 100px;
+  margin-bottom: 50px;
+}
+
+#admin_page{
+  position: relative;
+  top: 100px;
+  width: 80%;
+  height: auto;
+  /*border: 1px solid black;*/
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+#admin_page h1,
+#admin_page h4{
+  width: 100%;
+}
+
+#admin_page_div1,
+#admin_page_div2{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+#admin_page_div1 p{
+  width: 25%;
+  border: 1px solid black;
+  margin: 0;
+}
+
+#admin_page_div2 p{
+  width: 20%;
+  border: 1px solid black;
+  margin: 0;
+}
+
+#admin_page p:first-child,
+#admin_page p:nth-of-type(2),
+#admin_page p:nth-of-type(3),
+#admin_page p:nth-of-type(4),
+#admin_page_div2 p:nth-of-type(5){
+  text-align: center;
+  font-weight: bold;
+}
+
+#admin_page p{
+  text-align: center;
+  font-size: 20px;
+}
+
+
+
+/*******************************END ADMIN PAGE***********************************/
 
 
 /*******************************FOOTER***********************************/

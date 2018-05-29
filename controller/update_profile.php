@@ -5,9 +5,9 @@ include '../model/db.php';
 $conn = connect();
 
 
-if(isset($_GET['loginID']) && empty($_POST)) {
+if(isset($_SESSION['loginID']) && empty($_POST)) {
 
-    $result = getOneUser($_GET['loginID']);
+    $result = getOneUser($_SESSION['loginID']);
 
     if(is_array($result)) {
       echo json_encode($result);
@@ -17,9 +17,9 @@ if(isset($_GET['loginID']) && empty($_POST)) {
     exit();
 }
 
-if(isset($_GET['loginID']) && !empty($_POST)) {
+if(isset($_SESSION['loginID']) && !empty($_POST)) {
 
-  if(updateUser($_POST, $_GET['loginID'])) {
+  if(updateUser($_POST, $_SESSION['loginID'])) {
     echo json_encode(Array('userUpdate'=>true));
   } else {
     echo json_encode(Array('userUpdate'=>false));

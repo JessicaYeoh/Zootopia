@@ -1,19 +1,19 @@
 // GOOGLE MAPS API
-// window.onload = myMap;
-//
-// function myMap() {
-//   var myCenter = new google.maps.LatLng(-27.469771, 153.025124);
-//   var mapCanvas = document.getElementById("map");
-//   var mapOptions = {center: myCenter, zoom: 5};
-//   var map = new google.maps.Map(mapCanvas, mapOptions);
-//   var marker = new google.maps.Marker({position:myCenter});
-//   marker.setMap(map);
-//
-//   google.maps.event.addListener(marker,'click',function() {
-//   map.setZoom(12);
-//   map.setCenter(marker.getPosition());
-//   });
-// }
+window.onload = myMap;
+
+function myMap() {
+  var myCenter = new google.maps.LatLng(-27.469771, 153.025124);
+  var mapCanvas = document.getElementById("map");
+  var mapOptions = {center: myCenter, zoom: 5};
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  var marker = new google.maps.Marker({position:myCenter});
+  marker.setMap(map);
+
+  google.maps.event.addListener(marker,'click',function() {
+  map.setZoom(12);
+  map.setCenter(marker.getPosition());
+  });
+}
 // GOOGLE MAPS API
 
 // LOGIN/REGISTRATION PAGE
@@ -79,59 +79,392 @@ $(function() { //shorthand of $(document).ready(function() { ... });
 });
 
 
-$(function() {
-    $("#ad_section2").click(function(){
-        $("#ad_form_section1").hide();
-        $("#ad_form_section2").show();
-    });
+// AJAX post ad
 
-    $("#back_section1").click(function(){
-        $("#ad_form_section1").show();
-        $("#ad_form_section2").hide();
-    });
+// function addAd(login_ID) {
+//
+//     var petID = $( "#pet_ad option:selected" ).val();
+//     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
+//
+//       $.ajax(
+//         {
+//           url:addAdUrl,
+//           method: 'post',
+//           data: $('#ad_form').serialize(),
+//           datatype: 'json',
+//           success:function(result) {
+//             if(result.petAd == false){
+//               alert("Pet ad already exists!");
+//             }else{
+//               alert("Ad posted!");
+//               $('#image_table').hide();
+//             }
+//
+//           },
+//           error: function(error) {
+//               alert("error");
+//             }
+//         }
+//       );
+//
+// }
 
-    $("#ad_section3").click(function(){
-        $("#ad_form_section3").show();
-        $("#ad_form_section2").hide();
-    });
+// END AJAX post ad
 
-    $("#back_section2").click(function(){
-        $("#ad_form_section2").show();
-        $("#ad_form_section3").hide();
-    });
-});
 
-// END OF FUNCTIONS TO SHOW/HIDE POST AN AD SECTION
+
+
+// $(function() {
+//     $("#ad_section2").click(function(){
+//         $("#ad_form_section1").hide();
+//         $("#ad_form_section2").show();
+//     });
+//
+//     $("#back_section1").click(function(){
+//         $("#ad_form_section1").show();
+//         $("#ad_form_section2").hide();
+//     });
+//
+//     $("#ad_section3").click(function(){
+//         $("#ad_form_section3").show();
+//         $("#ad_form_section2").hide();
+//     });
+//
+//     $("#back_section2").click(function(){
+//         $("#ad_form_section2").show();
+//         $("#ad_form_section3").hide();
+//     });
+// });
+
+// function addAd(login_ID) {
+$(document).ready(function(){
+  $("#ad_form").validate({
+      rules:{
+         ad_title:{
+           required: true
+         },
+         description:{
+           required: true
+         },
+         location:{
+           required: true
+         },
+         pet_ad:{
+           required: true
+         },
+         booking_type:{
+           required: true
+         },
+         price:{
+           required: true
+         },
+         multiple_files:{
+           required: true
+         }
+      },
+      messages:{
+          ad_title: {
+            required: "please enter an ad title"
+          },
+          description: {
+            required: "please enter a description"
+          },
+          location: {
+            required: "please enter a location"
+          },
+          pet_ad:{
+            required: "please select a pet"
+          },
+          booking_type:{
+            required: "please select booking type"
+          },
+          price:{
+            required: "please enter a price"
+          },
+          multiple_files: {
+            required: "please upload images"
+          }
+      },
+      submitHandler: function(form) {
+        var petID = $( "#pet_ad option:selected" ).val();
+        // var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
+        var addAdUrl = "../../controller/post_ad_process.php?petID=" + petID;
+
+             $(form).ajaxSubmit({
+                 url:addAdUrl,
+                 method: 'post',
+                 data: $('#ad_form').serialize(),
+                 datatype: 'json',
+                 success:function(result) {
+                     if(result.petAd == false){
+                       alert("Pet ad already exists!");
+                     }else{
+                       alert("Ad posted!");
+                       $('#image_table').hide();
+                     }
+                 },
+                 error: function(error) {
+                     alert("error");
+                 }
+            });
+          }
+      });
+// }
+})
+
+
+//     var petID = $( "#pet_ad option:selected" ).val();
+//     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
+//
+//       $.ajax(
+//         {
+//           url:addAdUrl,
+//           method: 'post',
+//           data: $('#ad_form').serialize(),
+//           datatype: 'json',
+//           success:function(result) {
+//             if(result.petAd == false){
+//               alert("Pet ad already exists!");
+//             }else{
+//               alert("Ad posted!");
+//               $('#image_table').hide();
+//             }
+//
+//           },
+//           error: function(error) {
+//               alert("error");
+//             }
+//         }
+//       );
+//
+// }
+
+
+
+
+
+
+
+
+
+
+
+// $(document).ready(function(){
+//
+// // $('#ad_button').click(function() {
+//
+//   $("#ad_form_section1").validate({
+//       rules:{
+//             ad_title:{
+//               required: true
+//             },
+//             description:{
+//               required: true
+//             }
+//       },
+//       messages:{
+//             ad_title: {
+//               required: "please enter an ad title"
+//             },
+//             description: {
+//               required: "please enter a description"
+//             }
+//       }
+//   });
+//
+//   $("#ad_form_section2").validate({
+//       rules:{
+//             location:{
+//               required: true
+//             },
+//             pet_ad:{
+//               required: true
+//             },
+//             booking_type:{
+//               required: true
+//             },
+//             price:{
+//               required: true
+//             }
+//       },
+//       messages:{
+//             location: {
+//               required: "please enter a location"
+//             },
+//             pet_ad:{
+//               required: "please select a pet"
+//             },
+//             booking_type:{
+//               required: "please select booking type"
+//             },
+//             price:{
+//               required: "please enter a price"
+//             }
+//       }
+//   });
+//
+//
+//     $("#ad_form_section3").validate({
+//         rules:{
+//               multiple_files:{
+//                 required: true
+//               }
+//         },
+//         messages:{
+//               multiple_files: {
+//                 required: "please upload images"
+//               }
+//         },
+//             submitHandler: function(form) {
+//               var petID = $( "#pet_ad option:selected" ).val();
+//               var addAdUrl = "../../controller/post_ad_process.php?petID=" + petID;
+//
+//               var data = $('#ad_form_section1').serialize() + '&' + $('#ad_form_section2').serialize() + '&' + $('#ad_form_section3').serialize();
+//
+// // console.log(data);
+// console.log($('#ad_form_section1').serialize());
+// console.log($('#ad_form_section2').serialize());
+// console.log($('#ad_form_section3').serialize());
+//
+//         // var title = $('input#ad_title').val();
+// 				// var desrc = $('textarea#description').val();
+// 				// var emailaddress = $('input#emailaddress').val();
+// 				// var message = $('textarea#message').val();
+//
+// 				// var dataString = 'ad_title=' + title + '&description='+ desrc;
+//
+//
+//                    $(form).ajaxSubmit({
+//                       url:addAdUrl,
+//                       type:"post",
+//                       data: data,
+//                       datatype: 'json',
+//                       success: function(result){
+//                           if(result.petAd == false){
+//                             alert("Pet ad already exists!");
+//                           }else{
+//                             alert("Ad posted!");
+//                             $('#image_table').hide();
+//                           }
+//                           // alert("Success");
+//                       },
+//                       error: function(error) {
+//                         alert("Error");
+//                       }
+//                   });
+//
+//             }
+//       });
+//
+//
+//
+//       $("#ad_section2").click(function(){
+//           if ($('#ad_form_section1').valid()) {
+//
+//               $("#ad_form_section1").hide();
+//               $("#ad_form_section2").show();
+//
+//           }
+//       });
+//
+//       $("#back_section1").click(function(){
+//
+//           if ($('#ad_form_section2').valid()) {
+//
+//               $("#ad_form_section1").show();
+//               $("#ad_form_section2").hide();
+//
+//           }
+//       });
+//
+//       $("#ad_section3").click(function(){
+//
+//           if ($('#ad_form_section2').valid()) {
+//
+//               $("#ad_form_section3").show();
+//               $("#ad_form_section2").hide();
+//
+//           }
+//       });
+//
+//       $("#back_section2").click(function(){
+//
+//           if ($('#ad_form_section3').valid()) {
+//
+//               $("#ad_form_section2").show();
+//               $("#ad_form_section3").hide();
+//
+//           }
+//       });
+//     // });
+// });
+
 
 // Update profile function
-function showMsg(login_ID) {
-
-    var updateUrl = "../../controller/update_profile.php?loginID=" + login_ID;
-
-      $.ajax(
-        {
-          url:updateUrl,
-          method: 'post',
-          data: $('#profile_update_form').serialize(),
-          datatype: 'json',
-          success:function(result) {
-              if(result.userUpdate == true) {
-                alert("Updated");
-                var name=$("#profile_first_name").val(); //get the value of first name typed into the input
-                $(".welcome").html("Welcome "+name);
-              } else {
-                alert("Error");
+$(document).ready(function(){
+    $("#profile_update_form").validate({
+        rules:{
+              postcode:{
+                required: true,
+                digits: true,
+                minlength: 4
+              },
+              fname:{
+                required: true
+              },
+              lname:{
+                required: true
+              },
+              suburb:{
+                required: true
+              },
+              state:{
+                required: true
               }
-
-          },
-          error: function(error) {
-                alert("Error");
-
+        },
+        messages:{
+              postcode: {
+                required: "please enter a postcode",
+                digits: "please enter digits only"
+              },
+              fname:{
+                required: "please enter your name"
+              },
+              lname:{
+                required: "please enter your surname"
+              },
+              suburb:{
+                required: "please enter your suburb"
+              },
+              state:{
+                required: "please enter your state"
               }
-        }
-      );
-}
-// END Update profile function
+        },
+            submitHandler: function(form) {
+              var updateUrl = "../../controller/update_profile.php";
+
+                   $(form).ajaxSubmit({
+                       url:updateUrl,
+                       method: 'post',
+                       data: $('#profile_update_form').serialize(),
+                       datatype: 'json',
+                       success:function(result) {
+                        //  console.log(result);
+                           if(result.userUpdate == true) {
+                             alert("Updated");
+                           } else {
+                             alert("Error");
+                           }
+
+                       },
+                       error: function(error) {
+                             alert("Error");
+
+                       }
+                  });
+            }
+      });
+})
 
 
 // Update pet profile
@@ -160,52 +493,69 @@ function updatePet(pet_ID) {
 }
 // END update pet profile
 
-// AJAX add pet
-// function addPet(login_ID) {
-//
-//     var addPetUrl = "../../controller/add_pet_profile.php?loginID=" + login_ID;
-//
-//       $.ajax(
-//         {
-//           url:addPetUrl,
-//           method: 'post',
-//           data: $('#pet_profile_update_form').serialize(),
-//           datatype: 'json',
-//           success:function(result) {
-//               alert("Pet added");
-//           },
-//           error: function(error) {
-//               alert("Error");
-//             }
-//         }
-//       );
-// }
-// END AJAX add pet
-
-
-
 
 // AJAX create booking
-function addBooking(login_ID) {
+$(document).ready(function(){
+    $("#create_booking_form").validate({
+        rules:{
+              book_date:{
+                required: true,
+              },
+              start:{
+                required: true
+              },
+              finish:{
+                required: true
+              },
+              agreed_price:{
+                required: true
+              },
+              pet:{
+                required: true
+              },
+              priceType:{
+                required: true
+              }
+        },
+        messages:{
+              book_date: {
+                required: "please select a date"
+              },
+              start: {
+                required: "please select a start time"
+              },
+              finish: {
+                required: "please select a finish time"
+              },
+              agreed_price:{
+                required: "please enter a price"
+              },
+              pet:{
+                required: "please select a pet"
+              },
+              priceType:{
+                required: "please select price type"
+              }
+        },
+            submitHandler: function(form) {
+              var addBookingUrl = "../../controller/create_booking_process.php";
 
-    var addBookingUrl = "../../controller/create_booking_process.php?loginID=" + login_ID;
-
-      $.ajax(
-        {
-          url:addBookingUrl,
-          method: 'post',
-          data: $('#create_booking_form').serialize(),
-          datatype: 'json',
-          success:function(result) {
-              alert("Booking added");
-          },
-          error: function(error) {
-              alert("Error");
+                   $(form).ajaxSubmit({
+                      url:addBookingUrl,
+                      type:"post",
+                      success: function(){
+                        alert('Booking successfully added!');
+                      },
+                      error: function(error) {
+                        alert("Error");
+                      }
+                  });
             }
-        }
-      );
-}
+      });
+})
 // END AJAX create booking
+
+
 
 
 
@@ -400,41 +750,6 @@ function checkPet() {
     }
 
 
-
-// AJAX post ad
-// $("#ad_form").submit(function(e) {
-//   e.preventDefault()
-function addAd(login_ID) {
-
-    var petID = $( "#pet_ad option:selected" ).val();
-    var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
-
-      $.ajax(
-        {
-          url:addAdUrl,
-          method: 'post',
-          data: $('#ad_form').serialize(),
-          datatype: 'json',
-          success:function(result) {
-            if(result.petAd == false){
-              alert("Pet ad already exists!");
-            }else{
-              alert("Ad posted!");
-              $('#image_table').hide();
-            }
-
-          },
-          error: function(error) {
-              alert("error");
-            }
-        }
-      );
-
-}
-
-// });
-// END AJAX post ad
-
 $(document).ready(function(){
  load_image_data();
  function load_image_data()
@@ -450,12 +765,14 @@ $(document).ready(function(){
    }
   });
  }
+
  $('#multiple_files').change(function(){
   var error_images = '';
   var form_data = new FormData();
   var files = $('#multiple_files')[0].files;
-  if(files.length > 6)                      //FIX THIS
+  if(files.length > 6)                   //FIX THIS
   {
+
    error_images += 'You can not select more than 6 files';
   }
   else
@@ -501,6 +818,7 @@ $(document).ready(function(){
     {
      $('#error_multiple_files').html('<br /><label class="text-success">Uploaded</label>');
      load_image_data();
+           console.log(files.length);
     }
    });
   }
@@ -546,3 +864,30 @@ $(document).ready(function (){
   });
 
 });
+
+
+
+
+
+function deletePet(PetID) {
+  var x = confirm("Are you sure you want to delete?");
+  if (x == true) {
+
+      var deleteUrl = "../../controller/delete_pet_process.php?PetID=" + PetID;
+
+      $.ajax(
+        {
+          url: deleteUrl,
+          method: 'get',
+          datatype: 'json',
+          success:function(result) {
+              alert("deleted");
+              $('#pet_profiles_update_form_'+PetID).remove();
+          },
+          error: function(error) {
+              alert("error deleting");
+          }
+        }
+      );
+    }
+}

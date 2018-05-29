@@ -7,17 +7,6 @@ include 'nav.php';
 $conn = connect();
 ?>
 
-<div id="browse_ads">
-
-    <h1>My First Google Map</h1>
-
-    <div>
-      <div id="map"></div>
-    </div>
-
-</div>
-
-
 <div id="ads_container">
 
 
@@ -38,32 +27,16 @@ $conn = connect();
 
   <div id="individual_ad">
     <?php
-    // $login_ID = $_SESSION['loginID'];
-    // $userID = $_SESSION['userID'];
+    $result = getAllAds();
 
-    // $allPets = getAllPets($userID);
-
-    $getAds = "SELECT * FROM tblad
-    INNER JOIN tbladimages ON tblad.adID = tbladimages.adID
-    INNER JOIN tblpet ON tblpet.petID = tblad.petID
-    INNER JOIN tbluser ON tbluser.userID = tblpet.userID
-    INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
-    ";
-    $stmt = $conn->prepare($getAds);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $total_ads = $stmt->rowCount();
-
-    for($i=0;$i<$total_ads;$i++){
-        $adTitle = $result[$i]['adTitle'];
-        // $descr = $result[$i]['adDescription'];
-        $loc = $result[$i]['location'];
-        $price = $result[$i]['petPrice'];
-        $priceType = $result[$i]['priceType'];
-        $bookType = $result[$i]['bookingType'];
-        $img = $result[$i]['image_name'];
-        $adID = $result[$i]['adID'];
+    foreach($result as $row){
+        $adTitle = $row['adTitle'];
+        $loc = $row['location'];
+        $price = $row['petPrice'];
+        $priceType = $row['priceType'];
+        $bookType = $row['bookingType'];
+        $img = $row['image_name'];
+        $adID = $row['adID'];
     ?>
 
 
@@ -71,8 +44,18 @@ $conn = connect();
 
 
             <div id="image_preview">
+              <?php
+              if(isset($img)){
+              ?>
               <img id="previewing" src="../img/<?php
               echo $img;?>" width="130px" height="130px"/>
+              <?php
+              }else{
+              ?>
+              <img id="previewing" src="../img/no_photo.jpg" width="130px" height="130px"/>
+              <?php
+              }
+              ?>
             </div>
 
             <hr id="line">
@@ -81,10 +64,6 @@ $conn = connect();
 
                   <p class="ad_info_label">Ad Title: </p>
                   <p class="ad_info_value"> <?php echo $adTitle; ?> </p>
-
-                  <!-- <p class="ad_info_label"> Description: </p>
-                  <p class="ad_info_value"> <?php
-                  // echo $descr; ?> </p> -->
 
                   <p class="ad_info_label"> Location: </p>
                   <p class="ad_info_value"> <?php echo $loc; ?> </p>
@@ -100,20 +79,30 @@ $conn = connect();
 
             </div>
 
-<div id="book_minfo">
-  <button class="btn btn-primary">Book Now</button>
+            <div id="book_minfo">
+              <button class="btn btn-primary">Book Now</button>
 
 
-  <a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
-    <button type="button" class="btn btn-primary"> More info </button>
-  </a>
-</div>
+              <a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
+                <button type="button" class="btn btn-primary"> More info </button>
+              </a>
+            </div>
 
           </div>
       <?php
       }
       ?>
     </div>
+
+  </div>
+
+  <div id="browse_ads">
+
+      <h1>My First Google Map</h1>
+
+      <div>
+        <div id="map"></div>
+      </div>
 
   </div>
 

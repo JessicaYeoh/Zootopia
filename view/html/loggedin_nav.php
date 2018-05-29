@@ -1,3 +1,7 @@
+<?php
+$loginID = $_SESSION['loginID'];
+?>
+
 <div id="loggedin_nav_container">
 
 <nav id="loggedin_nav" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -10,52 +14,58 @@
     <div class="collapse navbar-collapse" id="loggedinNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="loggedin_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+          <a class="nav-link" href="loggedin_page.php?loginID=<?php echo $loginID; ?>">
             Dashboard
           </a>
         </li>
 
 <li class="nav-item">
-        <a class="nav-link" href="update_profile_page.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+        <a class="nav-link" href="update_profile_page.php?loginID=<?php echo $loginID; ?>">
           Account Details
         </a>
     </li>
 <li class="nav-item">
-        <a class="nav-link" href="pet_profile.php?loginID=<?php echo $_SESSION['loginID']; ?>">
+        <a class="nav-link" href="pet_profile.php?loginID=<?php echo $loginID; ?>">
           Your Pets
         </a>
     </li>
     <?php
-
-    $getOneUser = "SELECT * FROM tbllogin
-    INNER JOIN tbluser ON tbllogin.loginID = tbluser.loginID
-    WHERE tbllogin.loginID = :lid;";
-    $stmt = $conn->prepare($getOneUser);
-    $stmt->bindParam(':lid', $_SESSION['loginID'], PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = getOneUser($loginID);
 
     if($result['isOwner'] == "YES") {
     ?>
-    <li class="nav-item">
-        <a class="nav-link" href="create_booking.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-          Create Booking
-        </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="create_booking.php?loginID=<?php echo $loginID; ?>">
+              Create Booking
+            </a>
+        </li>
     <?php
     }
     ?>
-<li class="nav-item">
-        <a class="nav-link" href="my_ads.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-          My ads
-        </a>
-</li>
 
-<li class="nav-item">
-        <a class="nav-link" href="payments.php?loginID=<?php echo $_SESSION['loginID']; ?>">
-          Payments
-        </a>
-</li>
+    <li class="nav-item">
+            <a class="nav-link" href="my_ads.php?loginID=<?php echo $loginID; ?>">
+              My ads
+            </a>
+    </li>
+
+    <li class="nav-item">
+            <a class="nav-link" href="payments.php?loginID=<?php echo $loginID; ?>">
+              Payments
+            </a>
+    </li>
+
+    <?php
+    if($result['isAdmin'] == "YES") {
+    ?>
+        <li class="nav-item">
+                <a class="nav-link" href="admin_console.php?loginID=<?php echo $loginID; ?>">
+                  Admin Page
+                </a>
+        </li>
+    <?php
+    }
+    ?>
       </ul>
     </div>
 </nav>

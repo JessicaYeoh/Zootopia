@@ -27,13 +27,8 @@ $conn = connect();
         if(!isset($_SESSION['message'])){
           $_SESSION['message'] = "";
         }else{
-        echo '<script>
-                alert("';
-                echo $_SESSION['message'];
-                echo '")';
-        echo '</script>';
-
-        unset ($_SESSION['message']);
+          echo $_SESSION['message'];
+          unset ($_SESSION['message']);
         }
         ?>
       </p>
@@ -43,79 +38,79 @@ $conn = connect();
     <?php
     $login_ID = $_GET['loginID'];
     $userID = $_SESSION['userID'];
+    $result = userPets($userID);
 
-    // $allPets = getAllPets($userID);
+    foreach($result as $row){
+        $petID = $row['petID'];
 
-    $getPets = "SELECT * FROM tblpet INNER JOIN tblimagespet ON tblpet.petID = tblimagespet.petID WHERE userID = :uid;";
-    $stmt = $conn->prepare($getPets);
-    $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $total_no_pets = $stmt->rowCount();
-
-    for($i=0;$i<$total_no_pets;$i++){
-        $petID = $result[$i]['petID'];
-
-        $petName = $result[$i]['petName'];
-        $aniType = $result[$i]['petAnimal'];
-        $breed = $result[$i]['petBreed'];
-        $age = $result[$i]['petAge'];
-        $size = $result[$i]['petSize'];
-        $img = $result[$i]['imageURL'];
+        $petName = $row['petName'];
+        $aniType = $row['petAnimal'];
+        $breed = $row['petBreed'];
+        $age = $row['petAge'];
+        $size = $row['petSize'];
+        $img = $row['imageURL'];
     ?>
 
 
-        <div id="pet_profiles_update_form">
+    <?php
+    if($row['inactive'] == 0) {
+    ?>
 
-            <div id="update_pet">
-              <a href="petProfile.php?petID=<?php echo $petID;?>&#38;loginID=<?php echo $login_ID; ?>">
-                <button type="button" class="btn btn-primary"> Edit </button>
-              </a>
-            </div>
-<!-- Insert default image if no pet image selected -->
-<?php
-if(isset($img) && ($img == "../img/")) {
-?>
-            <div id="image_preview">
-              <img id="previewing" src="<?php echo $img;?>no_photo.jpg" width="130px" height="130px"/>
-            </div>
-<?php
-}else {
-?>
-            <div id="image_preview">
-              <img id="previewing" src="<?php echo $img;?>" width="130px" height="130px"/>
-            </div>
-<?php
-}
-?>
-            <hr id="line">
+        <form id="pet_profiles_update_form_<?php echo $petID;?>" class="pet_prof_container" method="post">
 
-            <div id="pet_info">
+                  <div id="update_pet">
+                    <a href="petProfile.php?petID=<?php echo $petID;?>&#38;loginID=<?php echo $login_ID; ?>">
+                      <button type="button" class="btn btn-primary"> Edit </button>
+                    </a>
 
-                  <p class="pet_info_label">Pet Name: </p>
-                  <p class="pet_info_value"> <?php echo $petName; ?> </p>
+                    <input type="button" id="delete_pet_button" class="btn btn-primary" value="Delete" onclick="deletePet(<?php echo $petID; ?>)"/>
+                  </div>
 
-                  <p class="pet_info_label"> Animal type: </p>
-                  <p class="pet_info_value"> <?php echo $aniType; ?> </p>
+                  <!-- Insert default image if no pet image selected -->
+                  <?php
+                  if(isset($img) && ($img == "../img/")) {
+                  ?>
+                      <div id="image_preview">
+                        <img id="previewing" src="<?php echo $img;?>no_photo.jpg" width="130px" height="130px"/>
+                      </div>
+                  <?php
+                  }else {
+                  ?>
+                      <div id="image_preview">
+                        <img id="previewing" src="<?php echo $img;?>" width="130px" height="130px"/>
+                      </div>
+                  <?php
+                  }
+                  ?>
+                  <hr id="line">
 
-                  <p class="pet_info_label"> Breed type: </p>
-                  <p class="pet_info_value"> <?php echo $breed; ?> </p>
+                  <div id="pet_info">
+                        <p class="pet_info_label">Pet Name: </p>
+                        <p class="pet_info_value"> <?php echo $petName; ?> </p>
 
-                  <p class="pet_info_label"> Pet age: </p>
-                  <p class="pet_info_value"> <?php echo $age; ?> </p>
+                        <p class="pet_info_label"> Animal type: </p>
+                        <p class="pet_info_value"> <?php echo $aniType; ?> </p>
 
-                  <p class="pet_info_label"> Pet size: </p>
-                  <p class="pet_info_value"> <?php echo $size; ?> </p>
+                        <p class="pet_info_label"> Breed type: </p>
+                        <p class="pet_info_value"> <?php echo $breed; ?> </p>
 
-            </div>
+                        <p class="pet_info_label"> Pet age: </p>
+                        <p class="pet_info_value"> <?php echo $age; ?> </p>
 
-          </div>
-      <?php
+                        <p class="pet_info_label"> Pet size: </p>
+                        <p class="pet_info_value"> <?php echo $size; ?> </p>
+                  </div>
+
+          </form>
+
+          <?php
+          }
       }
       ?>
     </div>
 
   </div>
+
+<?php include "footer.php";?>
 
 </body>

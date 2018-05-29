@@ -76,5 +76,6 @@ $login_ID = $_GET['loginID'];
 
   </div>
 
+<?php include "footer.php";?>
 
 </body>
