@@ -26,7 +26,9 @@ $login_ID = $_GET['loginID'];
       <?php include "profile_pic.php"; ?>
     </div>
 
-    <div class="grid-item item3">3</div>
+    <div class="grid-item item3">
+      <?php include "dashboard_ads.php"; ?>
+    </div>
 
     <div class="grid-item item4">
       <?php include "pet_modal.php"; ?>

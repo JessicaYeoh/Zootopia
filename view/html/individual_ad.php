@@ -12,18 +12,16 @@ $ad_ID = $_GET['adID'];
 
 $adInfo = getOneAd($ad_ID);
 
-$title = $adInfo['adTitle'];
-$descr = $adInfo['adDescription'];
-$loc = $adInfo['location'];
-$price = $adInfo['petPrice'];
-$ptype = $adInfo['priceType'];
-$btype = $adInfo['bookingType'];
+$title = $adInfo[0]['adTitle'];
+$descr = $adInfo[0]['adDescription'];
+$loc = $adInfo[0]['location'];
+$price = $adInfo[0]['petPrice'];
+$ptype = $adInfo[0]['priceType'];
+$btype = $adInfo[0]['bookingType'];
 
-
-$firstName = $adInfo['firstName'];
-$email = $adInfo['loginUsername'];
-$phone = $adInfo['phone'];
-$img = $adInfo['image_name'];
+$firstName = $adInfo[0]['firstName'];
+$email = $adInfo[0]['loginUsername'];
+$phone = $adInfo[0]['phone'];
 ?>
 
 
@@ -50,10 +48,22 @@ $img = $adInfo['image_name'];
           <p id="ad_ph"> <?php echo $phone;?> </p>
         </div>
 
+
+
         <div class="ad-group">
+<?php
+foreach($adInfo as $row) {
+?>
+
           <img id="previewing" src="../img/<?php
-          echo $img;?>" width="130px" height="130px"/>
+          echo $row['image_name'];?>" width="130px" height="130px"/>
+
+<?php
+}
+?>
+
         </div>
+
 
         <div class="ad-group">
           <h5>Description</h5>

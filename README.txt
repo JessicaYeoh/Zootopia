@@ -11,3 +11,8 @@ Functions of the website:
 - anonymous users can view ads
 - pet owners will create bookings for the customer to accept
 - payments made through payment gateway
+
+
+Administrator login details:
+Username - jessica.yeoh@outlook.com
+Password - qwerty123

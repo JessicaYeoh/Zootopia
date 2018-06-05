@@ -214,7 +214,7 @@ function getOneAd($ad_ID){
   $stmt = $conn->prepare($showAd);
   $stmt->bindParam(':aid', $ad_ID, PDO::PARAM_INT);
   $stmt->execute();
-  return $stmt->fetch(PDO::FETCH_ASSOC);
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // get all ads per user
@@ -228,7 +228,28 @@ function getUserAds(){
   INNER JOIN tblpet ON tblpet.petID = tblad.petID
   INNER JOIN tbluser ON tbluser.userID = tblpet.userID
   INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
-  WHERE tblpet.userID = :uid;";
+  WHERE tblpet.userID = 8
+  GROUP BY tbladimages.adID;";
+
+  $stmt = $conn->prepare($getAds);
+  $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getThreeAds(){
+  $conn = connect();
+
+  $userID = $_SESSION['userID'];
+
+  $getAds = "SELECT * FROM tblad
+  INNER JOIN tbladimages ON tblad.adID = tbladimages.adID
+  INNER JOIN tblpet ON tblpet.petID = tblad.petID
+  INNER JOIN tbluser ON tbluser.userID = tblpet.userID
+  INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
+  WHERE tblpet.userID = :uid AND tblad.inactiveAd = 0
+  GROUP BY tbladimages.adID
+  LIMIT 3;";
 
   $stmt = $conn->prepare($getAds);
   $stmt->bindParam(':uid', $userID, PDO::PARAM_INT);
@@ -244,7 +265,7 @@ function getAllAds(){
   INNER JOIN tblpet ON tblpet.petID = tblad.petID
   INNER JOIN tbluser ON tbluser.userID = tblpet.userID
   INNER JOIN tbllogin ON tbllogin.loginID = tbluser.loginID
-  ";
+  GROUP BY tbladimages.adID;";
   $stmt = $conn->prepare($getAllAds);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);

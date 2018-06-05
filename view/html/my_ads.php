@@ -49,8 +49,13 @@ $conn = connect();
 
     ?>
 
-          <div id="show_ads">
+    <?php
+    if($row['inactiveAd'] == 0) {
+    ?>
 
+          <form id="show_ads_<?php echo $adID;?>">
+
+            <div id="show_ads">
               <div id="image_preview">
                 <img id="previewing" src="../img/<?php echo $img;?>" width="130px" height="130px"/>
               </div>
@@ -80,10 +85,13 @@ $conn = connect();
                   <a id="show_pet" href="individual_ad.php?adID=<?php echo $adID;?>">
                     <button type="button" class="btn btn-primary"> More info </button>
                   </a>
-              </div>
 
+                  <input type="button" id="delete_ad_button" class="btn btn-primary" value="Delete" onclick="deleteAd(<?php echo $adID; ?>)"/>
+              </div>
             </div>
+          </form>
       <?php
+        }
       }
       ?>
 
@@ -94,8 +102,9 @@ if (count($result) == 0){
 ?>
 
 <div>
-  <p>
-    No ads posted!
+  <p id="no_ads">
+    You currently have no ads posted! Please <a href="post_ad.php?loginID=<?php
+    echo $_SESSION['loginID']; ?>">click here</a> to post an ad.
   </p>
 </div>
 

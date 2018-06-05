@@ -79,64 +79,7 @@ $(function() { //shorthand of $(document).ready(function() { ... });
 });
 
 
-// AJAX post ad
-
-// function addAd(login_ID) {
-//
-//     var petID = $( "#pet_ad option:selected" ).val();
-//     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
-//
-//       $.ajax(
-//         {
-//           url:addAdUrl,
-//           method: 'post',
-//           data: $('#ad_form').serialize(),
-//           datatype: 'json',
-//           success:function(result) {
-//             if(result.petAd == false){
-//               alert("Pet ad already exists!");
-//             }else{
-//               alert("Ad posted!");
-//               $('#image_table').hide();
-//             }
-//
-//           },
-//           error: function(error) {
-//               alert("error");
-//             }
-//         }
-//       );
-//
-// }
-
-// END AJAX post ad
-
-
-
-
-// $(function() {
-//     $("#ad_section2").click(function(){
-//         $("#ad_form_section1").hide();
-//         $("#ad_form_section2").show();
-//     });
-//
-//     $("#back_section1").click(function(){
-//         $("#ad_form_section1").show();
-//         $("#ad_form_section2").hide();
-//     });
-//
-//     $("#ad_section3").click(function(){
-//         $("#ad_form_section3").show();
-//         $("#ad_form_section2").hide();
-//     });
-//
-//     $("#back_section2").click(function(){
-//         $("#ad_form_section2").show();
-//         $("#ad_form_section3").hide();
-//     });
-// });
-
-// function addAd(login_ID) {
+// AJAX post ads
 $(document).ready(function(){
   $("#ad_form").validate({
       rules:{
@@ -187,7 +130,6 @@ $(document).ready(function(){
       },
       submitHandler: function(form) {
         var petID = $( "#pet_ad option:selected" ).val();
-        // var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
         var addAdUrl = "../../controller/post_ad_process.php?petID=" + petID;
 
              $(form).ajaxSubmit({
@@ -209,196 +151,8 @@ $(document).ready(function(){
             });
           }
       });
-// }
 })
-
-
-//     var petID = $( "#pet_ad option:selected" ).val();
-//     var addAdUrl = "../../controller/post_ad_process.php?loginID=" + login_ID + "&petID=" + petID;
-//
-//       $.ajax(
-//         {
-//           url:addAdUrl,
-//           method: 'post',
-//           data: $('#ad_form').serialize(),
-//           datatype: 'json',
-//           success:function(result) {
-//             if(result.petAd == false){
-//               alert("Pet ad already exists!");
-//             }else{
-//               alert("Ad posted!");
-//               $('#image_table').hide();
-//             }
-//
-//           },
-//           error: function(error) {
-//               alert("error");
-//             }
-//         }
-//       );
-//
-// }
-
-
-
-
-
-
-
-
-
-
-
-// $(document).ready(function(){
-//
-// // $('#ad_button').click(function() {
-//
-//   $("#ad_form_section1").validate({
-//       rules:{
-//             ad_title:{
-//               required: true
-//             },
-//             description:{
-//               required: true
-//             }
-//       },
-//       messages:{
-//             ad_title: {
-//               required: "please enter an ad title"
-//             },
-//             description: {
-//               required: "please enter a description"
-//             }
-//       }
-//   });
-//
-//   $("#ad_form_section2").validate({
-//       rules:{
-//             location:{
-//               required: true
-//             },
-//             pet_ad:{
-//               required: true
-//             },
-//             booking_type:{
-//               required: true
-//             },
-//             price:{
-//               required: true
-//             }
-//       },
-//       messages:{
-//             location: {
-//               required: "please enter a location"
-//             },
-//             pet_ad:{
-//               required: "please select a pet"
-//             },
-//             booking_type:{
-//               required: "please select booking type"
-//             },
-//             price:{
-//               required: "please enter a price"
-//             }
-//       }
-//   });
-//
-//
-//     $("#ad_form_section3").validate({
-//         rules:{
-//               multiple_files:{
-//                 required: true
-//               }
-//         },
-//         messages:{
-//               multiple_files: {
-//                 required: "please upload images"
-//               }
-//         },
-//             submitHandler: function(form) {
-//               var petID = $( "#pet_ad option:selected" ).val();
-//               var addAdUrl = "../../controller/post_ad_process.php?petID=" + petID;
-//
-//               var data = $('#ad_form_section1').serialize() + '&' + $('#ad_form_section2').serialize() + '&' + $('#ad_form_section3').serialize();
-//
-// // console.log(data);
-// console.log($('#ad_form_section1').serialize());
-// console.log($('#ad_form_section2').serialize());
-// console.log($('#ad_form_section3').serialize());
-//
-//         // var title = $('input#ad_title').val();
-// 				// var desrc = $('textarea#description').val();
-// 				// var emailaddress = $('input#emailaddress').val();
-// 				// var message = $('textarea#message').val();
-//
-// 				// var dataString = 'ad_title=' + title + '&description='+ desrc;
-//
-//
-//                    $(form).ajaxSubmit({
-//                       url:addAdUrl,
-//                       type:"post",
-//                       data: data,
-//                       datatype: 'json',
-//                       success: function(result){
-//                           if(result.petAd == false){
-//                             alert("Pet ad already exists!");
-//                           }else{
-//                             alert("Ad posted!");
-//                             $('#image_table').hide();
-//                           }
-//                           // alert("Success");
-//                       },
-//                       error: function(error) {
-//                         alert("Error");
-//                       }
-//                   });
-//
-//             }
-//       });
-//
-//
-//
-//       $("#ad_section2").click(function(){
-//           if ($('#ad_form_section1').valid()) {
-//
-//               $("#ad_form_section1").hide();
-//               $("#ad_form_section2").show();
-//
-//           }
-//       });
-//
-//       $("#back_section1").click(function(){
-//
-//           if ($('#ad_form_section2').valid()) {
-//
-//               $("#ad_form_section1").show();
-//               $("#ad_form_section2").hide();
-//
-//           }
-//       });
-//
-//       $("#ad_section3").click(function(){
-//
-//           if ($('#ad_form_section2').valid()) {
-//
-//               $("#ad_form_section3").show();
-//               $("#ad_form_section2").hide();
-//
-//           }
-//       });
-//
-//       $("#back_section2").click(function(){
-//
-//           if ($('#ad_form_section3').valid()) {
-//
-//               $("#ad_form_section2").show();
-//               $("#ad_form_section3").hide();
-//
-//           }
-//       });
-//     // });
-// });
-
+// END AJAX POST AD
 
 // Update profile function
 $(document).ready(function(){
@@ -556,9 +310,6 @@ $(document).ready(function(){
 // END AJAX create booking
 
 
-
-
-
 // Check email if already exists
 function checkemail() {
 
@@ -640,7 +391,6 @@ $(document).ready(function(){
 $(document).ready(function (e) {
 
 		// Function to preview image after validation
-		// $(function() {
 		$("#file").change(function() {
 
     		var file = this.files[0];
@@ -662,7 +412,6 @@ $(document).ready(function (e) {
         		reader.readAsDataURL(this.files[0]);
 		    }
 		});
-		// });
 		function imageIsLoaded(e) {
 		$("#file").css("color","green");
 		$('#image_preview').css("display", "block");
@@ -712,8 +461,6 @@ function completeUpload(success, fileName) {
 	}
 	return true;
 }
-
-
 
 
 function checkPet() {
@@ -866,9 +613,6 @@ $(document).ready(function (){
 });
 
 
-
-
-
 function deletePet(PetID) {
   var x = confirm("Are you sure you want to delete?");
   if (x == true) {
@@ -883,6 +627,29 @@ function deletePet(PetID) {
           success:function(result) {
               alert("deleted");
               $('#pet_profiles_update_form_'+PetID).remove();
+          },
+          error: function(error) {
+              alert("error deleting");
+          }
+        }
+      );
+    }
+}
+
+function deleteAd(AdID) {
+  var x = confirm("Are you sure you want to delete?");
+  if (x == true) {
+
+      var deleteUrl = "../../controller/delete_ad_process.php?AdID=" + AdID;
+
+      $.ajax(
+        {
+          url: deleteUrl,
+          method: 'get',
+          datatype: 'json',
+          success:function(result) {
+              alert("deleted");
+              $('#show_ads_'+AdID).remove();
           },
           error: function(error) {
               alert("error deleting");
